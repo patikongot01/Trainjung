@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     shadowOpacity: 1,
-    width: 360,
+    width: 400,
     height: 626,
   },
   train21: {
@@ -89,6 +89,8 @@ const styles = StyleSheet.create({
     left: 0,
     width: 88,
     height: 88,
+    justifyContent: 'center', 
+    alignItems: 'center',
   },
   tRAINJUNG: {
     position: "absolute",
@@ -111,6 +113,8 @@ const styles = StyleSheet.create({
     left: 0,
     width: 88,
     height: 122,
+    alignItems: "center",
+    justifyContent: "center",
   },
   logo: {
     position: "absolute",
@@ -118,6 +122,8 @@ const styles = StyleSheet.create({
     left: 136,
     width: 88,
     height: 122,
+    alignItems: "center",
+    justifyContent: "center",
   },
   login: {
     position: "absolute",
@@ -132,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 65,
-    height: 27,
+    height: 40,
   },
   rectangleView: {
     position: "absolute",
@@ -159,11 +165,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 55,
-    height: 12,
+    height: 30,
   },
   password1: {
     position: "absolute",
-    top: 31,
+    top: 15,
     left: 25,
   },
   password2: {
@@ -171,7 +177,7 @@ const styles = StyleSheet.create({
     top: 314,
     left: 29,
     width: 301,
-    height: 57,
+    height: 50,
   },
   rectangleView1: {
     position: "absolute",
@@ -184,6 +190,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 300,
     height: 40,
+    alignItems: "center",
+    justifyContent: "center",
   },
   userID: {
     position: "absolute",
@@ -198,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 42,
-    height: 12,
+    height: 15,
   },
   userIdEMailRailwaycot: {
     position: "absolute",
@@ -229,7 +237,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 107,
-    height: 12,
+    height: 15,
   },
   checkRegistrationStatus: {
     position: "absolute",
@@ -245,7 +253,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 145,
-    height: 12,
+    height: 15,
   },
   backgroundButton: {
     position: "absolute",
@@ -266,7 +274,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     width: 66,
-    height: 17,
+    height: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonLogin: {
     position: "absolute",
@@ -274,6 +284,8 @@ const styles = StyleSheet.create({
     left: 30,
     width: 300,
     height: 40,
+    alignItems: "center",
+    justifyContent: "center",
   },
   loginAdmin: {
     position: "relative",
@@ -282,6 +294,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 800,
     overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

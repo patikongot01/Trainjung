@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   backgroundButton: {
     position: "absolute",
     top: 0,
-    left: 0,
+    left: 5,
     borderRadius: 10,
     backgroundColor: "#ff8a00",
     width: 141,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   sendNotification: {
     position: "absolute",
     top: 10,
-    left: 10,
+    left: 15,
     fontSize: 15,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   addStatus: {
     position: "absolute",
     top: 61,
-    left: 128,
+    left: 138,
     fontSize: 20,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 171,
     left: 79,
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#595959",
@@ -160,10 +160,18 @@ const styles = StyleSheet.create({
   view1: {
     flexDirection: "row",
     alignItems: "center",
+    top: -20,
+    width: 141,
+    height: 37,
+    
   },
   view2: {
     flexDirection: "row",
     alignItems: "center",
+    top: -20,
+    width: 141,
+    height: 37,
+    
   },
   ellipseView: {
     position: "absolute",
@@ -176,7 +184,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 137,
     left: 79,
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#595959",

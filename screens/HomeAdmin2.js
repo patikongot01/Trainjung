@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     shadowOpacity: 1,
-    width: 360,
+    width: 395,
     height: 696,
   },
   rectangleView: {
     position: "absolute",
     top: 0,
-    left: 0,
+    left: 10,
     borderRadius: 5,
     backgroundColor: "#fff",
     shadowColor: "rgba(19, 19, 19, 0.12)",
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   rectangleView1: {
     position: "absolute",
     top: 0,
-    left: 0,
+    left: 10,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     backgroundColor: "#f05a22",
@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
   groupView: {
     position: "absolute",
     top: 0,
-    left: 0,
+    left: 10,
     width: 296,
     height: 115,
   },
   oRDINARY: {
     position: "absolute",
     top: 25,
-    left: 42,
+    left: 52,
     fontSize: 10,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   nO379: {
     position: "absolute",
     top: 13,
-    left: 42,
+    left: 52,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     top: "11.3%",
     right: "89.53%",
     bottom: "68.7%",
-    left: "4.05%",
+    left: 28,
     maxWidth: "100%",
     overflow: "hidden",
     maxHeight: "100%",
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   bangkokChachoengsaoJunction: {
     position: "absolute",
     top: 26,
-    left: 106,
+    left: 116,
     fontSize: 10,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   rectangleView2: {
     position: "absolute",
     top: 88,
-    left: 31,
+    left: 51,
     backgroundColor: "#d9d9d9",
     borderStyle: "solid",
     borderColor: "#b4b4b4",
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   rectangleView3: {
     position: "absolute",
     top: 88,
-    left: 196,
+    left: 216,
     backgroundColor: "#d9d9d9",
     borderStyle: "solid",
     borderColor: "#b4b4b4",
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   bangkok: {
     position: "absolute",
     top: 15,
-    left: 0,
+    left: 10,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   text: {
     position: "absolute",
     top: 34,
-    left: 10,
+    left: 20,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   arr: {
     position: "absolute",
     top: 0,
-    left: 15,
+    left: 25,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   dep: {
     position: "absolute",
     top: 0,
-    left: 179,
+    left: 189,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   text1: {
     position: "absolute",
     top: 34,
-    left: 177,
+    left: 187,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   praChomKlao: {
     position: "absolute",
     top: 15,
-    left: 150,
+    left: 160,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -244,21 +244,21 @@ const styles = StyleSheet.create({
   arrowIcon: {
     position: "absolute",
     top: 16,
-    left: 59,
+    left: 69,
     width: 78,
     height: 15,
   },
   groupView1: {
     position: "absolute",
     top: 55,
-    left: 30,
+    left: 40,
     width: 235,
     height: 51,
   },
   groupView2: {
     position: "absolute",
     top: 172,
-    left: 32,
+    left: 42,
     shadowColor: "rgba(0, 0, 0, 0.25)",
     shadowOffset: {
       width: 0,
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   },
   back: {
     position: "absolute",
-    left: 20,
+    left: 30,
     top: 63,
     width: 16,
     height: 15,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   edit: {
     position: "absolute",
     top: 61,
-    left: 161,
+    left: 171,
     fontSize: 20,
     fontWeight: "700",
     fontFamily: "Istok Web",
