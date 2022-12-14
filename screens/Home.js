@@ -23,7 +23,8 @@ const Home = () => {
     { value: "Bangkok", label: "Phaya Thai" },
   ]);
 
-  return (    <View style={styles.home2}>
+  return (  <View style={styles.homeBG}>
+            <View style={styles.home2}>
       <View style={styles.groupView}>
         <View style={styles.homeBGOR} />
         <Text style={styles.home}>Home</Text>
@@ -205,6 +206,7 @@ const Home = () => {
         />
       </View>
     </View>
+  </View>
   );
 };
 
@@ -954,7 +956,7 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 723,
+    top: 670,
     left: 0,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
@@ -980,11 +982,18 @@ const styles = StyleSheet.create({
     height: 40,
   },
   home2: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });
