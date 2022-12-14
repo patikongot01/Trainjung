@@ -210,12 +210,9 @@ const styles = StyleSheet.create({
   },
   userIdEMailRailwaycot: {
     position: "absolute",
-    top: 31,
-    left: 26,
-    minWidth: 250,
-    minHeight: 12,
-    maxWidth: 2,
-    maxHeight: 12,
+    top: 15,
+    left: 16,
+    
   },
   userID1: {
     position: "absolute",
