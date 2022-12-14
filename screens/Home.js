@@ -17,12 +17,18 @@ const Home = () => {
   const [dropDownHomeValue, setDropDownHomeValue] = useState("");
   const [dropDownHomeItems, setDropDownHomeItems] = useState([
     { value: "Pra chom Klao", label: "Pra chom Klao" },
-    { value: "Chon buri", label: "Chon buri" },
-    { value: "Bangkok", label: "Bangkok" },
+    { value: "Urupong", label: "Urupong" },
+    { value: "Bangkok", label: "Phaya Thai" },
+    { value: "Bangkok", label: "Makkasan" },
+    { value: "Bangkok", label: "Phaya Thai" },
   ]);
 
-  return (
-    <View style={styles.home2}>
+  return (    <View style={styles.home2}>
+      <View style={styles.groupView}>
+        <View style={styles.homeBGOR} />
+        <Text style={styles.home}>Home</Text>
+        <Text style={styles.welcomeToTrainjung}>Welcome to trainjung</Text>
+      </View>
       <Pressable
         style={styles.notiBotton}
         onPress={() => navigation.navigate("Notification")}
@@ -30,14 +36,9 @@ const Home = () => {
         <Image
           style={styles.icon}
           resizeMode="cover"
-          source={require("../assets/group-2931.svg")}
+          source={require("../assets/Noti.png")}
         />
       </Pressable>
-      <View style={styles.groupView}>
-        <View style={styles.homeBGOR} />
-        <Text style={styles.home}>Home</Text>
-        <Text style={styles.welcomeToTrainjung}>Welcome to trainjung</Text>
-      </View>
       <StatusBar barStyle="default" />
       <Text style={styles.available}>Available</Text>
       <Pressable style={styles.groupPressable}>
@@ -225,8 +226,8 @@ const styles = StyleSheet.create({
   },
   notiBotton: {
     position: "absolute",
-    left: 276,
-    top: 81,
+    left: 270,
+    top: 70,
     width: 57,
     height: 57,
   },
