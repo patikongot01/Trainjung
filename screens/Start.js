@@ -17,7 +17,7 @@ const Start = () => {
         <Text style={styles.enterForAdmin}>Enter for Admin</Text>
       </Pressable>
       <Image
-        style={styles.train21}
+        style={styles.img}
         resizeMode="cover"
         source={require("../assets/train-2-1.png")}
       />
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   tRAINJUNG: {
     position: "absolute",
     top: 396,
-    left: 74,
+    left: 90,
     fontSize: 30,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   easyToFollow: {
     position: "absolute",
     top: 445,
-    left: 133,
+    left: 150,
     fontSize: 15,
     fontFamily: "Istok Web",
     color: "#fff",
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   or: {
     position: "absolute",
     top: 516,
-    left: 175,
+    left: 188,
     fontSize: 12,
     fontFamily: "Istok Web",
     color: "#fff",
@@ -77,20 +77,20 @@ const styles = StyleSheet.create({
   },
   enterForAdmin1: {
     position: "absolute",
-    left: 137,
+    left: 153,
     top: 541,
   },
-  train21: {
+  img: {
     position: "absolute",
     top: 308,
-    left: 136,
+    left: 150,
     width: 88,
     height: 88,
   },
   backgroundButton: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: 2.5,
+    left: 13,
     borderRadius: 10,
     backgroundColor: "#f05a22",
     width: 72,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   enter1: {
     position: "absolute",
-    left: 153,
+    left: 168,
     top: 488,
   },
   start: {
