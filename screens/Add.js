@@ -215,14 +215,14 @@ const styles = StyleSheet.create({
   groupView: {
     position: "absolute",
     top: 86,
-    left: 0,
+    left: 5,
     width: 130,
     height: 40,
   },
   groupView1: {
     position: "absolute",
-    top: 236,
-    left: 2,
+    top: 226,
+    left: 5,
     width: 130,
     height: 40,
   },
@@ -403,9 +403,11 @@ const styles = StyleSheet.create({
   groupView5: {
     position: "absolute",
     top: 145,
-    left: 23,
+    left: 30,
     width: 306,
     height: 581,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   add: {
     position: "relative",
