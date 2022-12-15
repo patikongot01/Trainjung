@@ -16,10 +16,7 @@ const Favourite = () => {
   return ( <View style={styles.homeBG}>
     <View style={styles.favourite2}>
       <StatusBar barStyle="default" />
-      <Pressable
-        style={styles.back}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
         <Image
           style={styles.icon}
           resizeMode="cover"

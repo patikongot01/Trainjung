@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Pressable,
   Image,
@@ -7,11 +7,33 @@ import {
   View,
   Text,
   StatusBar,
+  ActivityIndicator,
+  FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 
+
 const Home = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getMovies = async () => {
+     try {
+      const response = await fetch('https://reactnative.dev/movies.json');
+      const json = await response.json();
+      setData(json.movies);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getMovies();
+  }, []);
+
   const navigation = useNavigation();
   const [dropDownHomeOpen, setDropDownHomeOpen] = useState(false);
   const [dropDownHomeValue, setDropDownHomeValue] = useState("");
@@ -61,72 +83,7 @@ const Home = () => {
       </Pressable>
       <StatusBar barStyle="default" />
       <Text style={styles.available}>Available</Text>
-      <Pressable style={styles.groupPressable}>
-        <View style={styles.groupView1}>
-          <View style={styles.rectangleView} />
-          <View style={styles.rectangleView1} />
-        </View>
-        <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
-        <Text style={styles.nO379}>{`NO.379 `}</Text>
-        <Image
-          style={styles.vectorIcon}
-          resizeMode="cover"
-          source={require("../assets/vector1.png")}
-        />
-        <Text style={styles.bangkokChachoengsaoJunction}>
-          Bangkok-Chachoengsao Junction
-        </Text>
-        <View style={styles.groupView2}>
-          <Text style={styles.bangkok}>Bangkok</Text>
-          <Text style={styles.text}>16:35</Text>
-          <Text style={styles.arr}>Arr.</Text>
-          <Text style={styles.dep}>Dep.</Text>
-          <Text style={styles.text1}>17:27</Text>
-          <Text style={styles.praChomKlao}>Pra Chom Klao</Text>
-          <Image
-            style={styles.arrowIcon}
-            resizeMode="cover"
-            source={require("../assets/arrow-2.png")}
-          />
-        </View>
-        <Image
-          style={styles.groupIcon}
-          resizeMode="cover"
-          source={require("../assets/group-91.png")}
-        />
-      </Pressable>
-      <Pressable style={styles.groupPressable1}>
-        <View style={styles.groupView3}>
-          <View style={styles.rectangleView2} />
-          <View style={styles.rectangleView3} />
-        </View>
-        <Text style={styles.oRDINARY1}>{`ORDINARY `}</Text>
-        <Text style={styles.nO277}>{`NO.277 `}</Text>
-        <Image
-          style={styles.vectorIcon1}
-          resizeMode="cover"
-          source={require("../assets/vector1.png")}
-        />
-        <Text style={styles.bangkokKabinBuri}>Bangkok-Kabin Buri</Text>
-        <View style={styles.groupView4}>
-          <Text style={styles.bangkok1}>Bangkok</Text>
-          <Text style={styles.text2}>15:25</Text>
-          <Text style={styles.arr1}>Arr.</Text>
-          <Text style={styles.dep1}>Dep.</Text>
-          <Text style={styles.text3}>16:15</Text>
-          <Text style={styles.praChomKlao1}>Pra Chom Klao</Text>
-          <Image
-            style={styles.arrowIcon1}
-            resizeMode="cover"
-            source={require("../assets/arrow-2.png")}
-          />
-        </View>
-      </Pressable>
-      <Image
-        style={styles.groupIcon1}
-        resizeMode="cover"
-        source={require("../assets/group-91.png")}
-      />
+
       <Pressable style={styles.homeTrainINFO}>
         <View style={styles.groupView5}>
           <View style={styles.rectangleView4} />
@@ -134,6 +91,11 @@ const Home = () => {
         </View>
         <Text style={styles.oRDINARY2}>{`ORDINARY `}</Text>
         <Text style={styles.nO283}>{`NO.283 `}</Text>
+        <Image
+          style={styles.hamburgerMenuIcon}
+          resizeMode="cover"
+          source={require("../assets/hamburger-menu.png")}
+        />
         <Image
           style={styles.vectorIcon2}
           resizeMode="cover"
@@ -156,15 +118,11 @@ const Home = () => {
           />
         </View>
       </Pressable>
+
       <Image
         style={styles.groupIcon2}
         resizeMode="cover"
         source={require("../assets/group-91.png")}
-      />
-      <Image
-        style={styles.hamburgerMenuIcon}
-        resizeMode="cover"
-        source={require("../assets/hamburger-menu.png")}
       />
       <Pressable
         style={styles.bottomTab}
@@ -839,11 +797,15 @@ const styles = StyleSheet.create({
   },
   hamburgerMenuIcon: {
     position: "absolute",
-    top: 316,
-    left: 302,
-    borderRadius: 2,
-    width: 15,
-    height: 14,
+    height: "13%",
+    width: "5.42%",
+    top: "11.3%",
+    right: "89.53%",
+    bottom: "68.7%",
+    left: "88.05%",
+    maxWidth: "100%",
+    overflow: "hidden",
+    maxHeight: "100%",
   },
   labelText: {
     position: "absolute",

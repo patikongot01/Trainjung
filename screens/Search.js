@@ -65,10 +65,7 @@ const Search = () => {
           />
         </View>
       </View>
-      <Pressable
-        style={styles.back}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
         <Image
           style={styles.icon}
           resizeMode="cover"

@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const Bookmark2 = () => {
   const navigation = useNavigation();
 
-  return (
+  return ( <View style={styles.homeBG}>
     <View style={styles.bookmark2}>
       <View style={styles.rectangleView} />
       <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
@@ -27,11 +27,13 @@ const Bookmark2 = () => {
         Bangkok- Ban Klong Luk Border
       </Text>
       <StatusBar barStyle="default" />
-      <Image
-        style={styles.backIcon}
-        resizeMode="cover"
-        source={require("../assets/back6.png")}
-      />
+      <Pressable style={styles.backIcon} onPress={() => navigation.goBack()}>
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/back6.png")}
+        />
+      </Pressable>
       <View style={styles.scroll}>
         <View style={styles.station10}>
           <View style={styles.station}>
@@ -138,6 +140,7 @@ const Bookmark2 = () => {
         </View>
       </View>
     </View>
+    </View>
   );
 };
 
@@ -182,7 +185,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: "2.88%",
     width: "5.28%",
-    top: "8.25%",
+    top: "8.75%",
     right: "79.17%",
     bottom: "88.88%",
     left: "15.56%",
@@ -202,12 +205,12 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     position: "absolute",
-    height: "1.9%",
-    width: "4.33%",
+    height: "3.9%",
+    width: "9.33%",
     top: "7.88%",
     right: "90.12%",
     bottom: "90.23%",
-    left: "5.56%",
+    left: "3.56%",
     maxWidth: "100%",
     overflow: "hidden",
     maxHeight: "100%",
@@ -676,7 +679,7 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 723,
+    top: 670,
     left: 0,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
@@ -695,11 +698,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   bookmark2: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });
