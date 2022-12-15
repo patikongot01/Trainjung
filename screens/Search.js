@@ -26,12 +26,12 @@ const Search = () => {
   ]);
   const navigation = useNavigation();
 
-  return (
+  return ( <View style={styles.homeBG}>
     <View style={styles.search2}>
       <StatusBar barStyle="default" />
       <View style={styles.background} />
-      <Text style={styles.to}>To</Text>
       <Text style={styles.form}>Form</Text>
+      <Text style={styles.to}>To</Text>
       <Text style={styles.findYourTrainLetsMakeA}>
         <Text style={styles.findYourTrain}>Find your train,</Text>
         <Text style={styles.letsMakeA}>let’s make a journey.</Text>
@@ -50,6 +50,7 @@ const Search = () => {
             placeholder="Select your location"
             items={buttonFromItems}
             labelStyle={styles.buttonFromValue}
+            dropDownDirection="TOP"
           />
         </View>
         <View style={styles.buttonTo}>
@@ -123,11 +124,13 @@ const Search = () => {
         </Pressable>
       </Pressable>
     </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   buttonFromValue: {
+    minHeight:300,
     color: "#b4b4b4",
     fontSize: 12,
     fontFamily: "Istok Web",
@@ -187,8 +190,8 @@ const styles = StyleSheet.create({
   },
   findYourTrainLetsMakeA: {
     position: "absolute",
-    top: 155,
-    left: 57,
+    top: 165,
+    left: 28,
     fontSize: 25,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -236,6 +239,14 @@ const styles = StyleSheet.create({
     left: 0,
     width: 300,
     height: 40,
+  },
+  dropDown1: {
+    minHeight: 300,
+    position: "absolute",
+    top: 299,
+    left: 30,
+    width: 300,
+    height: 202,
   },
   dropDown: {
     position: "absolute",
@@ -398,7 +409,7 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 723,
+    top: 670,
     left: 0,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
@@ -417,11 +428,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   search2: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });

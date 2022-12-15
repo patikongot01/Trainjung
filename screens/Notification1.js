@@ -39,10 +39,7 @@ const Notification1 = () => {
       <Text style={styles.text}>{`06:10 `}</Text>
       <Text style={styles.onTime}>On time</Text>
       <Text style={styles.bangkokStation}>Phayathai Station</Text>
-      <Pressable
-        style={styles.back}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
         <Image
           style={styles.icon}
           resizeMode="cover"
