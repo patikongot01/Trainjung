@@ -7,6 +7,7 @@ import {
   Text,
   Pressable,
   Image,
+  ScrollView,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useNavigation } from "@react-navigation/native";
@@ -27,6 +28,7 @@ const Search = () => {
   const navigation = useNavigation();
 
   return ( <View style={styles.homeBG}>
+    <ScrollView>
     <View style={styles.search2}>
       <StatusBar barStyle="default" />
       <View style={styles.background} />
@@ -71,7 +73,7 @@ const Search = () => {
           resizeMode="cover"
           source={require("../assets/back.png")}
         />
-      </Pressable>
+      </Pressable> 
       <Image
         style={styles.logoIcon}
         resizeMode="cover"
@@ -121,13 +123,13 @@ const Search = () => {
         </Pressable>
       </Pressable>
     </View>
+    </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   buttonFromValue: {
-    minHeight:300,
     color: "#b4b4b4",
     fontSize: 12,
     fontFamily: "Istok Web",

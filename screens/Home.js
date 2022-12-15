@@ -9,31 +9,28 @@ import {
   StatusBar,
   ActivityIndicator,
   FlatList,
+  ScrollView,
 } from "react-native";
+import axios from 'axios'
 import { useNavigation } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 
 const Home = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-
-  const getMovies = async () => {
-     try {
-      const response = await fetch('https://reactnative.dev/movies.json');
-      const json = await response.json();
-      setData(json.movies);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const [ items, setItems] = useState([])
 
   useEffect(() => {
-    getMovies();
-  }, []);
+    //axios.get('https://shark-app-wblp9.ondigitalocean.app/train/283')
+        //.then(res => setItems(res.items))
+        fetch('https://shark-app-wblp9.ondigitalocean.app/train/283')
+            .then(res => res.json())
+            .then((result) => {
+              setItems(result)
+            })
+      }, [])
 
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
   const navigation = useNavigation();
   const [dropDownHomeOpen, setDropDownHomeOpen] = useState(false);
   const [dropDownHomeValue, setDropDownHomeValue] = useState("");
@@ -51,40 +48,26 @@ const Home = () => {
     { value: "Lat Krabang", label: "Lat Krabang" },
     { value: "King Mongkut", label: "King Mongkut" },
     { value: "Skewered heads", label: "Skewered heads" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
-    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop1", label: "Rajprarop" },
+    { value: "Rajprarop2", label: "Rajprarop" },
+    { value: "Rajprarop3", label: "Rajprarop" },
+    { value: "Rajprarop4", label: "Rajprarop" },
+    { value: "Rajprarop5", label: "Rajprarop" },
+    { value: "Rajprarop6", label: "Rajprarop" },
+    { value: "Rajprarop7", label: "Rajprarop" },
+    { value: "Rajprarop8", label: "Rajprarop" },
+    { value: "Rajprarop9", label: "Rajprarop" },
+    { value: "Rajprarop10", label: "Rajprarop" },
 
   ]);
 
   return (  <View style={styles.homeBG}>
-            <View style={styles.home2}>
-      <View style={styles.groupView}>
-        <View style={styles.homeBGOR} />
-        <Text style={styles.home}>Home</Text>
-        <Text style={styles.welcomeToTrainjung}>Welcome to trainjung</Text>
-      </View>
-      <Pressable
-        style={styles.notiBotton}
-        onPress={() => navigation.navigate("Notification")}
-      >
-        <Image
-          style={styles.icon}
-          resizeMode="cover"
-          source={require("../assets/Noti.png")}
-        />
-      </Pressable>
-      <StatusBar barStyle="default" />
-      <Text style={styles.available}>Available</Text>
-
-      <Pressable style={styles.homeTrainINFO}>
+      <View style={styles.home2}>
+      <ScrollView>
+      <View style={styles.ScrollViewData}>
+      {items.map(item => (
+        <View style={{flex: 2}}>
+        <Pressable style={styles.homeTrainINFO}>
         <View style={styles.groupView5}>
           <View style={styles.rectangleView4} />
           <View style={styles.rectangleView5} />
@@ -105,20 +88,42 @@ const Home = () => {
           Bangkok - Ban Plu ta Luang
         </Text>
         <View style={styles.groupView6}>
-          <Text style={styles.praChomKlao2}>Pra chom Klao</Text>
-          <Text style={styles.text4}>8:10</Text>
-          <Text style={styles.arr2}>Arr.</Text>
-          <Text style={styles.dep2}>Dep.</Text>
-          <Text style={styles.text5}>9:48</Text>
-          <Text style={styles.chonBuri}>Chon buri</Text>
+          <Text style={styles.praChomKlao2}>Txtt</Text>
+          <Text style={styles.text4}>Txtt</Text>
+          <Text style={styles.arr2}>Txtt</Text>
+          <Text style={styles.dep2}>Txtt</Text>
+          <Text style={styles.text5}>Txtt</Text>
+          <Text style={styles.chonBuri}>Txtt</Text>
           <Image
             style={styles.arrowIcon2}
             resizeMode="cover"
             source={require("../assets/arrow-2.png")}
-          />
-        </View>
+            />
+          </View>
+        </Pressable>
+      </View>
+      ))}
+      </View>
+      </ScrollView>
+      <View style={styles.BGAvailable}>
+      </View>
+        <View style={styles.groupView}>
+        <View style={styles.homeBGOR} />
+        <Text style={styles.home}>Home</Text>
+        <Text style={styles.welcomeToTrainjung}>Welcome to trainjung</Text>
+      </View>
+      <Pressable
+        style={styles.notiBotton}
+        onPress={() => navigation.navigate("Notification")}
+      >
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/Noti.png")}
+        />
       </Pressable>
-
+      <StatusBar barStyle="default" />
+      <Text style={styles.available}>Available</Text>
       <Image
         style={styles.groupIcon2}
         resizeMode="cover"
@@ -971,6 +976,23 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 800,
     overflow: "hidden",
+  },
+  ScrollViewData: {
+    top: 0,
+    left: 0,
+    position: "relative",
+    flex: 1,
+    width: "100%",
+    height: 5000,
+    overflow: "hidden",
+  },
+  BGAvailable: {
+    position: "absolute",
+    top: -10,
+    left: 0,
+    width: "100%",
+    height: 300,
+    backgroundColor: "#fff",
   },
   homeBG: {
     backgroundColor: "#fff",
