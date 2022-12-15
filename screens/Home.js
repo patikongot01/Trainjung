@@ -18,9 +18,28 @@ const Home = () => {
   const [dropDownHomeItems, setDropDownHomeItems] = useState([
     { value: "Pra chom Klao", label: "Pra chom Klao" },
     { value: "Urupong", label: "Urupong" },
-    { value: "Bangkok", label: "Phaya Thai" },
-    { value: "Bangkok", label: "Makkasan" },
-    { value: "Bangkok", label: "Phaya Thai" },
+    { value: "Phaya Thai", label: "Phaya Thai" },
+    { value: "Makkasan", label: "Makkasan" },
+    { value: "Asoke", label: "Asoke" },
+    { value: "Klongton", label: "Klongton" },
+    { value: "Sukhumvit 71", label: "Sukhumvit 71" },
+    { value: "Hua Mak", label: "Hua Mak" },
+    { value: "Ban Thap Chang", label: "Ban Thap Chang" },
+    { value: "Soi Wat Lanbun", label: "Soi Wat Lanbun" },
+    { value: "Lat Krabang", label: "Lat Krabang" },
+    { value: "King Mongkut", label: "King Mongkut" },
+    { value: "Skewered heads", label: "Skewered heads" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+    { value: "Rajprarop", label: "Rajprarop" },
+
   ]);
 
   return (  <View style={styles.homeBG}>

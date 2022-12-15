@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 const Favourite = () => {
   const navigation = useNavigation();
 
-  return (
+  return ( <View style={styles.homeBG}>
     <View style={styles.favourite2}>
       <StatusBar barStyle="default" />
       <Pressable
@@ -111,6 +111,7 @@ const Favourite = () => {
           <Text style={styles.labelText3}>Bookmark</Text>
         </Pressable>
       </View>
+    </View>
     </View>
   );
 };
@@ -468,7 +469,7 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 723,
+    top: 670,
     left: 0,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
@@ -487,11 +488,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   favourite2: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });
