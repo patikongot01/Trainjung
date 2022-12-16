@@ -18,7 +18,6 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 const Home = () => {
   const [ items, setItems] = useState([])
-  const [ items2, setItems2] = useState([])
 
   useEffect(() => {
         fetch('https://shark-app-wblp9.ondigitalocean.app/allTrainByStation')
@@ -27,15 +26,7 @@ const Home = () => {
               setItems(result)
             })
       }, [])
-  useEffect(() => {
-        fetch('https://shark-app-wblp9.ondigitalocean.app/allTrainByStation')
-            .then(res => res.json())
-            .then((result) => {
-              setItems8(result)
-            })
-      }, [])
-  console.log(items)
-
+ 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const navigation = useNavigation();

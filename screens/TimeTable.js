@@ -6,13 +6,36 @@ import {
   Image,
   Text,
   View,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
+import { useEffect, useState } from "react";
 
 const TimeTable = () => {
   const navigation = useNavigation();
+  const [ items, setItems] = useState([])
+  const [tableData, setTableData] = useState([]);
+  const HeadTable = ['No.', 'Station', 'Arr.', 'Dep.']
+
+useEffect(() => {
+  async function fetchData() {
+    const response = await fetch('https://shark-app-wblp9.ondigitalocean.app/Table/275');
+    const json = await response.json();
+    setItems(json);
+  }
+  fetchData();
+}, []);
+
+useEffect(() => {
+  const tableData = items.map((item, index) => [index, item.name, item.Arr, item.Dep]);
+  setTableData(tableData);
+}, [items]);
+
+const widthArr = [30, 130, 50, 100];
 
   return (
+    <View style={styles.homeBG}>
     <View style={styles.timeTable1}>
       <StatusBar barStyle="default" />
       <Pressable
@@ -25,6 +48,18 @@ const TimeTable = () => {
           source={require("../assets/back.png")}
         />
       </Pressable>
+      <ScrollView>
+      <View style={styles.ScrollViewData}>
+      <View style={styles.frameView}>
+        <View style={styles.groupView1}>
+      <Table>
+        <Row data={HeadTable} style={{alignItems: 'center'}} widthArr={widthArr}/>
+        <Rows data={tableData} style={{alignItems: 'center'}} widthArr={widthArr}/>
+      </Table>
+        </View>
+      </View>
+      </View>
+      </ScrollView>
       <Text style={styles.timeTable}>Time Table</Text>
       <View style={styles.ststus}>
         <View style={styles.groupView}>
@@ -40,20 +75,6 @@ const TimeTable = () => {
         <Text style={styles.bangkokBanKlongLukBorder}>
           Bangkok - Ban Klong Luk Border
         </Text>
-      </View>
-      <View style={styles.table}>
-        <View style={styles.view}>
-          <View style={styles.rectangleView1} />
-        </View>
-      </View>
-      <View style={styles.frameView}>
-        <View style={styles.groupView1}>
-          <View style={styles.rectangleView2} />
-          <Text style={styles.station}>Station</Text>
-          <Text style={styles.arr}>Arr.</Text>
-          <Text style={styles.dep}>Dep.</Text>
-          <Text style={styles.no}>No</Text>
-        </View>
       </View>
       <View style={styles.bottomTab}>
         <Pressable
@@ -102,6 +123,7 @@ const TimeTable = () => {
         </Pressable>
       </View>
     </View>
+  </View>
   );
 };
 
@@ -109,6 +131,9 @@ const styles = StyleSheet.create({
   ml42: {
     marginLeft: 42,
   },
+  header: { height: 50, backgroundColor: '#537791' },
+  text: { textAlign: 'center', fontWeight: '100' },
+  row: { height: 40, backgroundColor: 'white' },
   icon: {
     height: "100%",
     width: "100%",
@@ -143,6 +168,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f05a22",
     width: 279,
     height: 45,
+  },
+  columnStyles: {
   },
   groupView: {
     position: "absolute",
@@ -1383,6 +1410,15 @@ const styles = StyleSheet.create({
     width: 279,
     height: 0,
   },
+  ScrollViewData: {
+    top: -10,
+    left: 0,
+    position: "relative",
+    flex: 1,
+    width: "100%",
+    height: 1020,
+    overflow: "hidden",
+  },
   lineIcon44: {
     position: "absolute",
     top: 695,
@@ -1487,9 +1523,9 @@ const styles = StyleSheet.create({
   frameView: {
     position: "absolute",
     top: 164,
-    left: 38,
+    left: 52,
     width: 281,
-    height: 22,
+    height: 2200,
     overflow: "hidden",
   },
   labelText: {
@@ -1641,11 +1677,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   timeTable1: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+    homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });
