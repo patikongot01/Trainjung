@@ -18,16 +18,23 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 const Home = () => {
   const [ items, setItems] = useState([])
+  const [ items2, setItems2] = useState([])
 
   useEffect(() => {
-    //axios.get('https://shark-app-wblp9.ondigitalocean.app/train/283')
-        //.then(res => setItems(res.items))
-        fetch('https://shark-app-wblp9.ondigitalocean.app/train/283')
+        fetch('https://shark-app-wblp9.ondigitalocean.app/allTrainByStation')
             .then(res => res.json())
             .then((result) => {
               setItems(result)
             })
       }, [])
+  useEffect(() => {
+        fetch('https://shark-app-wblp9.ondigitalocean.app/allTrainByStation')
+            .then(res => res.json())
+            .then((result) => {
+              setItems8(result)
+            })
+      }, [])
+  console.log(items)
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -66,14 +73,14 @@ const Home = () => {
       <ScrollView>
       <View style={styles.ScrollViewData}>
       {items.map(item => (
-        <View style={{flex: 2}}>
+        <View style={{flex: 1}}>
         <Pressable style={styles.homeTrainINFO}>
         <View style={styles.groupView5}>
           <View style={styles.rectangleView4} />
           <View style={styles.rectangleView5} />
         </View>
         <Text style={styles.oRDINARY2}>{`ORDINARY `}</Text>
-        <Text style={styles.nO283}>{`NO.283 `}</Text>
+        <Text style={styles.nO283}>No.{item.number}</Text>
         <Image
           style={styles.hamburgerMenuIcon}
           resizeMode="cover"
@@ -88,12 +95,12 @@ const Home = () => {
           Bangkok - Ban Plu ta Luang
         </Text>
         <View style={styles.groupView6}>
-          <Text style={styles.praChomKlao2}>Txtt</Text>
-          <Text style={styles.text4}>Txtt</Text>
-          <Text style={styles.arr2}>Txtt</Text>
-          <Text style={styles.dep2}>Txtt</Text>
-          <Text style={styles.text5}>Txtt</Text>
-          <Text style={styles.chonBuri}>Txtt</Text>
+          <Text style={styles.praChomKlao2}>{item.name}</Text>
+          <Text style={styles.text4}>1</Text>
+          <Text style={styles.arr2}>2</Text>
+          <Text style={styles.dep2}>3</Text>
+          <Text style={styles.text5}>4</Text>
+          <Text style={styles.chonBuri}>5</Text>
           <Image
             style={styles.arrowIcon2}
             resizeMode="cover"
@@ -668,9 +675,9 @@ const styles = StyleSheet.create({
   },
   nO283: {
     position: "absolute",
-    top: 13,
+    top: 8,
     left: 42,
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#fff",
@@ -978,12 +985,12 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   ScrollViewData: {
-    top: 0,
+    top: -10,
     left: 0,
     position: "relative",
     flex: 1,
     width: "100%",
-    height: 5000,
+    height: 2500,
     overflow: "hidden",
   },
   BGAvailable: {
