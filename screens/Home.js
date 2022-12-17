@@ -20,7 +20,7 @@ const Home = () => {
   const [ items, setItems] = useState([])
 
   useEffect(() => {
-        fetch('https://shark-app-wblp9.ondigitalocean.app/allTrainByStation')
+        fetch('https://shark-app-wblp9.ondigitalocean.app/Home')
             .then(res => res.json())
             .then((result) => {
               setItems(result)
@@ -87,11 +87,11 @@ const Home = () => {
         </Text>
         <View style={styles.groupView6}>
           <Text style={styles.praChomKlao2}>{item.name}</Text>
-          <Text style={styles.text4}>1</Text>
+          <Text style={styles.text4}>item.time</Text>
           <Text style={styles.arr2}>2</Text>
           <Text style={styles.dep2}>3</Text>
           <Text style={styles.text5}>4</Text>
-          <Text style={styles.chonBuri}>5</Text>
+          <Text style={styles.chonBuri}>item.nameDes</Text>
           <Image
             style={styles.arrowIcon2}
             resizeMode="cover"
