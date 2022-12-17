@@ -14,6 +14,7 @@ const Notification1 = () => {
   const navigation = useNavigation();
 
   return (
+    <View style={styles.homeBG}>
     <View style={styles.notification}>
       <StatusBar barStyle="default" />
       <Text style={styles.notifications}>Notifications</Text>
@@ -46,6 +47,7 @@ const Notification1 = () => {
           source={require("../assets/back.png")}
         />
       </Pressable>
+    </View>
     </View>
   );
 };
@@ -117,9 +119,9 @@ const styles = StyleSheet.create({
   },
   vectorIcon: {
     position: "absolute",
-    height: "2.88%",
+    height: "3.20%",
     width: "5.28%",
-    top: "22.13%",
+    top: "23.53%",
     right: "84.72%",
     bottom: "75%",
     left: "10%",
@@ -185,11 +187,18 @@ const styles = StyleSheet.create({
     height: "1.9%",
   },
   notification: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });

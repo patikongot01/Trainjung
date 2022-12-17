@@ -10,14 +10,14 @@ import {
   ActivityIndicator,
   FlatList,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import axios from 'axios'
 import { useNavigation } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-
 const Home = () => {
-  const [ items, setItems] = useState([])
+const [ items, setItems] = useState([])
 
   useEffect(() => {
         fetch('https://shark-app-wblp9.ondigitalocean.app/Home')
@@ -26,6 +26,10 @@ const Home = () => {
               setItems(result)
             })
       }, [])
+
+  const onPressDetail = (number, name, nameDes) => {
+    navigation.navigate('Detail', {number: number, name: name, nameDes: nameDes})
+  }
  
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -34,28 +38,6 @@ const Home = () => {
   const [dropDownHomeValue, setDropDownHomeValue] = useState("");
   const [dropDownHomeItems, setDropDownHomeItems] = useState([
     { value: "Pra chom Klao", label: "Pra chom Klao" },
-    { value: "Urupong", label: "Urupong" },
-    { value: "Phaya Thai", label: "Phaya Thai" },
-    { value: "Makkasan", label: "Makkasan" },
-    { value: "Asoke", label: "Asoke" },
-    { value: "Klongton", label: "Klongton" },
-    { value: "Sukhumvit 71", label: "Sukhumvit 71" },
-    { value: "Hua Mak", label: "Hua Mak" },
-    { value: "Ban Thap Chang", label: "Ban Thap Chang" },
-    { value: "Soi Wat Lanbun", label: "Soi Wat Lanbun" },
-    { value: "Lat Krabang", label: "Lat Krabang" },
-    { value: "King Mongkut", label: "King Mongkut" },
-    { value: "Skewered heads", label: "Skewered heads" },
-    { value: "Rajprarop1", label: "Rajprarop" },
-    { value: "Rajprarop2", label: "Rajprarop" },
-    { value: "Rajprarop3", label: "Rajprarop" },
-    { value: "Rajprarop4", label: "Rajprarop" },
-    { value: "Rajprarop5", label: "Rajprarop" },
-    { value: "Rajprarop6", label: "Rajprarop" },
-    { value: "Rajprarop7", label: "Rajprarop" },
-    { value: "Rajprarop8", label: "Rajprarop" },
-    { value: "Rajprarop9", label: "Rajprarop" },
-    { value: "Rajprarop10", label: "Rajprarop" },
 
   ]);
 
@@ -64,8 +46,8 @@ const Home = () => {
       <ScrollView>
       <View style={styles.ScrollViewData}>
       {items.map(item => (
-        <View style={{flex: 1}}>
-        <Pressable style={styles.homeTrainINFO}>
+        <View style={{height: 140}}>
+        <Pressable style={styles.homeTrainINFO} onPress={() => onPressDetail(item.number,item.name,item.nameDes)}>
         <View style={styles.groupView5}>
           <View style={styles.rectangleView4} />
           <View style={styles.rectangleView5} />
@@ -73,25 +55,18 @@ const Home = () => {
         <Text style={styles.oRDINARY2}>{`ORDINARY `}</Text>
         <Text style={styles.nO283}>No.{item.number}</Text>
         <Image
-          style={styles.hamburgerMenuIcon}
-          resizeMode="cover"
-          source={require("../assets/hamburger-menu.png")}
-        />
-        <Image
           style={styles.vectorIcon2}
           resizeMode="cover"
           source={require("../assets/vector1.png")}
         />
         <Text style={styles.bangkokBanPluTaLuang}>
-          Bangkok - Ban Plu ta Luang
+          {item.name} - {item.nameDes}
         </Text>
         <View style={styles.groupView6}>
-          <Text style={styles.praChomKlao2}>{item.name}</Text>
-          <Text style={styles.text4}>item.time</Text>
-          <Text style={styles.arr2}>2</Text>
-          <Text style={styles.dep2}>3</Text>
-          <Text style={styles.text5}>4</Text>
-          <Text style={styles.chonBuri}>item.nameDes</Text>
+          <Text style={styles.nameBox}>{item.name}</Text>
+          <Text style={styles.timeBox}>{item.time}</Text>
+          <Text style={styles.timeDesBox}>{item.timeDes}</Text>
+          <Text style={styles.nameDesBox}>{item.nameDes}</Text>
           <Image
             style={styles.arrowIcon2}
             resizeMode="cover"
@@ -209,7 +184,7 @@ const styles = StyleSheet.create({
   notiBotton: {
     position: "absolute",
     left: 270,
-    top: 70,
+    top: 85,
     width: 57,
     height: 57,
   },
@@ -626,7 +601,7 @@ const styles = StyleSheet.create({
     left: 0,
     borderRadius: 5,
     backgroundColor: "#fff",
-    shadowColor: "rgba(19, 19, 19, 0.12)",
+    shadowColor: "rgba(19, 19, 19, 1)",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -696,20 +671,20 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-  praChomKlao2: {
+  nameBox: {
     position: "absolute",
-    top: 15,
+    top: 0,
     left: 0,
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#000",
     textAlign: "center",
   },
-  text4: {
+  timeBox: {
     position: "absolute",
-    top: 34,
-    left: 30,
+    top: 20,
+    left: 12,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -736,21 +711,21 @@ const styles = StyleSheet.create({
     color: "#595959",
     textAlign: "center",
   },
-  text5: {
+  timeDesBox: {
     position: "absolute",
-    top: 32,
-    left: 196,
+    top: 20,
+    left: 182,
     fontSize: 12,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#352555",
     textAlign: "center",
   },
-  chonBuri: {
+  nameDesBox: {
     position: "absolute",
-    top: 15,
-    left: 181,
-    fontSize: 12,
+    top: 0,
+    left: 155,
+    fontSize: 15,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#000",
@@ -758,8 +733,8 @@ const styles = StyleSheet.create({
   },
   arrowIcon2: {
     position: "absolute",
-    top: 17,
-    left: 93,
+    top: 19,
+    left: 63,
     width: 78,
     height: 15,
   },
@@ -981,7 +956,7 @@ const styles = StyleSheet.create({
     position: "relative",
     flex: 1,
     width: "100%",
-    height: 2500,
+    height: 2200,
     overflow: "hidden",
   },
   BGAvailable: {

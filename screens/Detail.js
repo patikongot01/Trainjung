@@ -9,22 +9,15 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const Detail = () => {
+const Detail = ({Navigation, route}) => {
   const navigation = useNavigation();
-
+  const onPressTable = (number) => {
+    navigation.navigate('TimeTable', {number: number})
+  }
   return (
+    <View style={styles.homeBG}>
     <View style={styles.detail}>
       <StatusBar barStyle="default" />
-      <Pressable
-        style={styles.back}
-        onPress={() => navigation.navigate("Search")}
-      >
-        <Image
-          style={styles.icon}
-          resizeMode="cover"
-          source={require("../assets/back.png")}
-        />
-      </Pressable>
       <Text style={styles.trainDetails}>Train Details</Text>
       <Image
         style={styles.imgIcon}
@@ -50,29 +43,35 @@ const Detail = () => {
       </Text>
       <Pressable
         style={styles.viewsNo275TimeTable1}
-        onPress={() => navigation.navigate("TimeTable")}
+        onPress={() => onPressTable(route.params.number)}
       >
-        <Text style={styles.viewsNo275TimeTable}>Views No.275 Time Table</Text>
+        <Text style={styles.viewsNo275TimeTable}>Views No. {route.params.number} Time Table</Text>
       </Pressable>
+      
       <Pressable
         style={styles.status}
-        onPress={() => navigation.navigate("Bookmark2")}
+        onPress={() => onPressTable(item.number)}
       >
         <View style={styles.rectangleView1} />
         <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
-        <Text style={styles.nO275}>{`NO.275 `}</Text>
+        <Text style={styles.nO275}>{`No. `}{route.params.number}</Text>
         <Image
           style={styles.vectorIcon}
           resizeMode="cover"
           source={require("../assets/vector1.png")}
         />
-        <Text style={styles.bangkok}>Bangkok</Text>
+        <Text style={styles.bangkok}>{route.params.name}</Text>
         <Text style={styles.arr}>Arr.</Text>
         <Text style={styles.dep}>Dep.</Text>
-        <Text style={styles.banKlongLukBorder}>
-          <Text style={styles.banKlong}>{` Ban Klong `}</Text>
-          <Text style={styles.lukBorder}>Luk Border</Text>
-        </Text>
+        <Text style={styles.nameDes}>{route.params.nameDes}</Text>
+      </Pressable>
+      <View style={styles.BackTable} ></View>
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/back.png")}
+        />
       </Pressable>
       <Pressable
         style={styles.bottomTab}
@@ -120,6 +119,7 @@ const Detail = () => {
           <Text style={styles.labelText3}>Bookmark</Text>
         </Pressable>
       </Pressable>
+    </View>
     </View>
   );
 };
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 40,
     left: 33,
-    fontSize: 12,
+    fontSize: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#fff",
@@ -288,11 +288,11 @@ const styles = StyleSheet.create({
   lukBorder: {
     margin: 0,
   },
-  banKlongLukBorder: {
+  nameDes: {
     position: "absolute",
     top: 40,
-    left: 228,
-    fontSize: 12,
+    left: 190,
+    fontSize: 18,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#fff",
@@ -453,12 +453,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  BGTable: {
+    position: "absolute",
+    top: -10,
+    left: 0,
+    width: "100%",
+    height: 300,
+    backgroundColor: "#fff",
+  },
   detail: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  homeBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });

@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Table, Row, Rows, Col, Cols } from 'react-native-table-component';
 import { useEffect, useState } from "react";
 
-const TimeTable = () => {
+const TimeTable = ({Navigation, route}) => {
   const navigation = useNavigation();
   const [ items, setItems] = useState([])
   const [tableData, setTableData] = useState([]);
@@ -20,7 +20,7 @@ const TimeTable = () => {
 
 useEffect(() => {
   async function fetchData() {
-    const response = await fetch('https://shark-app-wblp9.ondigitalocean.app/Table/275');
+    const response = await fetch('https://shark-app-wblp9.ondigitalocean.app/Table/'+route.params.number);
     const json = await response.json();
     setItems(json);
   }
@@ -38,16 +38,6 @@ const widthArr = [30, 130, 50, 100];
     <View style={styles.homeBG}>
     <View style={styles.timeTable1}>
       <StatusBar barStyle="default" />
-      <Pressable
-        style={styles.back}
-        onPress={() => navigation.navigate("Detail")}
-      >
-        <Image
-          style={styles.icon}
-          resizeMode="cover"
-          source={require("../assets/back.png")}
-        />
-      </Pressable>
       <ScrollView>
       <View style={styles.ScrollViewData}>
       <View style={styles.frameView}>
@@ -60,13 +50,15 @@ const widthArr = [30, 130, 50, 100];
       </View>
       </View>
       </ScrollView>
+      <View style={styles.BGTable}>
+      </View>
       <Text style={styles.timeTable}>Time Table</Text>
       <View style={styles.ststus}>
         <View style={styles.groupView}>
           <View style={styles.rectangleView} />
         </View>
         <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
-        <Text style={styles.nO275}>{`NO.275 `}</Text>
+        <Text style={styles.nO275}>{`No. `}{route.params.number}</Text>
         <Image
           style={styles.vectorIcon}
           resizeMode="cover"
@@ -76,6 +68,13 @@ const widthArr = [30, 130, 50, 100];
           Bangkok - Ban Klong Luk Border
         </Text>
       </View>
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/back.png")}
+        />
+      </Pressable>
       <View style={styles.bottomTab}>
         <Pressable
           style={styles.home}
@@ -140,6 +139,14 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
     overflow: "hidden",
     maxHeight: "100%",
+  },
+  BGTable: {
+    position: "absolute",
+    top: -10,
+    left: 0,
+    width: "100%",
+    height: 170,
+    backgroundColor: "#fff",
   },
   back: {
     position: "absolute",
