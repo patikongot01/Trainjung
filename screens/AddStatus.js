@@ -10,64 +10,86 @@ import {
   Text,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { RadioButton as RNPRadioButton } from "react-native-paper";
+
 
 const AddStatus = () => {
   const navigation = useNavigation();
-  const [ellipseRadioValue, setEllipseRadioValue] = useState("O");
+  const [Number, setNumber] = useState('');
+  const [From, setFrom] = useState('');
+  const [Destination, setDestination] = useState('');
+  const [Detail, setDetail] = useState('');
+  const onPressDetail = (Number,From,Destination,Detail) => {
+    navigation.navigate('AddStatus', { Number:Number,From:From,Destination:Destination,Detail:Detail });
+  }
 
   return (
     <View style={styles.addStatus1}>
       <StatusBar barStyle="default" />
       <Pressable
         style={styles.back}
-        onPress={() => navigation.navigate("HomeAdmin")}
+        onPress={() => navigation.goBack()}
       >
         <Image
           style={styles.icon}
           resizeMode="cover"
           source={require("../assets/back.png")}
         />
+   
       </Pressable>
       <View style={styles.rectangleView} />
       <TextInput
-        style={styles.groupTextInput}
-        placeholder="Problem ..."
+        style={styles.groupTextInput3}
+        placeholder="Detail"
         keyboardType="default"
         placeholderTextColor="#b9bfb8"
+        value={Detail}
+      onChangeText={text => setDetail(text)}
       />
       <Pressable style={styles.buttonLogin}>
-        <View style={styles.backgroundButton} />
-        <Text style={styles.sendNotification}>Send Notification</Text>
+        
       </Pressable>
+      <View style={styles.rectangleView1} />
+      <TextInput
+        style={styles.groupTextInput1}
+        placeholder="Destination"
+        keyboardType="default"
+        placeholderTextColor="#b9bfb8"
+        value={Destination}
+      onChangeText={text => setDestination(text)}
+      />
+      <Pressable style={styles.buttonLogin}>
+      </Pressable>
+      <View style={styles.rectangleView2} />
+      <TextInput
+        style={styles.groupTextInput2}
+        placeholder="From"
+        keyboardType="default"
+        placeholderTextColor="#b9bfb8"
+        value={From}
+      onChangeText={text => setFrom(text)}
+        
+      />
+      <Pressable style={styles.buttonLogin}>
+      </Pressable>
+      <View style={styles.rectangleView3} />
+      <TextInput
+        style={styles.groupTextInput}
+        placeholder="Number"
+        keyboardType="default"
+        placeholderTextColor="#b9bfb8"
+        value={Number}
+      onChangeText={text => setNumber(text)}
+        maxLength={3}
+      />
+     <Pressable
+  style={styles.buttonLogin}
+  onPress={() => createNotification(Number, From, Destination, Detail)}>
+  <View style={styles.backgroundButton} />
+  <Text style={styles.sendNotification}>Send Notification</Text>
+</Pressable>
       <Text style={styles.addStatus}>Add Status</Text>
-      <Text style={styles.delays}>Delays</Text>
-      <View style={styles.ellipseView}>
-        <RNPRadioButton.Group
-          value={ellipseRadioValue}
-          onValueChange={setEllipseRadioValue}
-        >
-          <View>
-            <View style={styles.view1}>
-              <RNPRadioButton
-                color="#6750a4"
-                uncheckedColor="#49454f"
-                value="On Time"
-              />
-              <Text>On Time</Text>
-            </View>
-            <View style={styles.view2}>
-              <RNPRadioButton
-                color="#6750a4"
-                uncheckedColor="#49454f"
-                value="Delay"
-              />
-              <Text>Delay</Text>
-            </View>
-          </View>
-        </RNPRadioButton.Group>
-      </View>
-      <Text style={styles.onTime}>On Time</Text>
+      
+      
     </View>
   );
 };
@@ -88,9 +110,9 @@ const styles = StyleSheet.create({
   },
   rectangleView: {
     position: "absolute",
-    top: 228,
+    top: 270,
     left: 35,
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: "#efecec",
     shadowColor: "#000",
     shadowOffset: {
@@ -100,19 +122,91 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 4,
     shadowOpacity: 1,
-    width: 298,
-    height: 78,
+    width: 300,
+    height: 50,
+  },
+  rectangleView1: {
+    position: "absolute",
+    top: 180,
+    left: 180,
+    borderRadius: 10,
+    backgroundColor: "#efecec",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 4,
+    elevation: 4,
+    shadowOpacity: 1,
+    width: 100,
+    height: 50,
+  },
+  rectangleView2: {
+    position: "absolute",
+    top: 180,
+    left: 35,
+    borderRadius: 10,
+    backgroundColor: "#efecec",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 4,
+    elevation: 4,
+    shadowOpacity: 1,
+    width: 100,
+    height: 50,
+  },
+  rectangleView3: {
+    position: "absolute",
+    top: 100,
+    left: 35,
+    borderRadius: 10,
+    backgroundColor: "#efecec",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 4,
+    elevation: 4,
+    shadowOpacity: 1,
+    width: 100,
+    height: 50,
   },
   groupTextInput: {
     position: "absolute",
-    top: 241,
+    top: 100,
     left: 46,
-    width: 268,
+    width: 90,
+    height: 58,
+  },
+  groupTextInput1: {
+    position: "absolute",
+    top: 180,
+    left: 190,
+    width: 80,
+    height: 58,
+  },
+  groupTextInput2: {
+    position: "absolute",
+    top: 180,
+    left: 46,
+    width: 80,
+    height: 58,
+  },
+  groupTextInput3: {
+    position: "absolute",
+    top: 270,
+    left: 46,
+    width: 280,
     height: 58,
   },
   backgroundButton: {
     position: "absolute",
-    top: 0,
+    top: 50,
     left: 5,
     borderRadius: 10,
     backgroundColor: "#ff8a00",
@@ -121,7 +215,7 @@ const styles = StyleSheet.create({
   },
   sendNotification: {
     position: "absolute",
-    top: 10,
+    top: 60,
     left: 15,
     fontSize: 15,
     fontWeight: "700",

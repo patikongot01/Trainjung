@@ -25,16 +25,16 @@
     "react-native-dropdown-picker": "^5.4.3",
     "react-native-fs": "^2.20.0",
     "react-native-loading-spinner-overlay": "^2.0.0",
+    "react-native-notifications": "^4.3.3",
+    "react-native-onesignal": "^4.5.0",
     "react-native-paper": "^5.0.1",
     "react-native-popup-menu": "^0.16.1",
+    "react-native-push-notification": "^8.1.1",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
-<<<<<<< HEAD
-    "react-navigation-stack": "^2.10.4",
-=======
     "react-native-table-component": "^1.2.2",
     "react-native-video": "^5.2.1",
->>>>>>> 5caf589f458c63c21c122d24570c1e3fda38a525
+    "react-navigation-stack": "^2.10.4",
     "util": "^0.12.5"
   },
   "devDependencies": {

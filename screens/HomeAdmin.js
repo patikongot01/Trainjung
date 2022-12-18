@@ -103,31 +103,10 @@ useEffect(() => {
           activeOpacity={0.2}
           onPress={() => navigation.navigate("AddStatus")}
         />
-        <Text style={styles.addStatus}>Add Status</Text>
+        <Text style={styles.addStatus}>Edit Status</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.groupTouchableOpacity1}
-        activeOpacity={0.2}
-        onPress={() => navigation.navigate("HomeAdmin2")}
-      >
-        <TouchableOpacity
-          style={styles.rectangleTouchableOpacity1}
-          activeOpacity={0.2}
-          onPress={() => navigation.navigate("HomeAdmin2")}
-        />
-        <Text style={styles.edit}>{`Edit `}</Text>
-      </TouchableOpacity>
-      <Pressable
-        style={styles.groupPressable1}
-        onPress={() => navigation.navigate("Add")}
-      >
-        <TouchableOpacity
-          style={styles.rectangleTouchableOpacity2}
-          activeOpacity={0.2}
-          onPress={() => navigation.navigate("Add")}
-        />
-        <Text style={styles.addDelete}>Add-Delete</Text>
-      </Pressable>
+      
+      
     </View>
   );
 };
@@ -202,7 +181,7 @@ height: '100%',
   },
   rectangleTouchableOpacity: {
     position: "absolute",
-    top: 0,
+    top: -200,
     left: 0,
     borderRadius: 10,
     backgroundColor: "#f05a22",
@@ -213,7 +192,7 @@ height: '100%',
   },
   addStatus: {
     position: "absolute",
-    top: 20,
+    top: -180,
     left: 21,
     fontSize: 20,
     fontWeight: "700",
@@ -225,16 +204,16 @@ height: '100%',
   },
   groupTouchableOpacity: {
     position: "absolute",
-    width: 150,
+    width: 250,
     height: 63,
     alignItems: "center",
     justifyContent: "center",
-    top: 469,
+    top: 500,
     left: 115,
   },
   rectangleTouchableOpacity1: {
     position: "absolute",
-    top: 0,
+    top: 100,
     left: 0,
     borderRadius: 10,
     backgroundColor: "#f05a22",
@@ -261,7 +240,7 @@ height: '100%',
   },
   rectangleTouchableOpacity2: {
     position: "absolute",
-    top: 0,
+    top: 100,
     left: 0,
     borderRadius: 10,
     backgroundColor: "#f05a22",

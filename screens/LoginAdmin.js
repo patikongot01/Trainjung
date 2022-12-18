@@ -104,24 +104,23 @@ const LoginAdmin = () => {
           onChangeText={text =>setPassword(text)}
           secureTextEntry
           keyboardType="default"
-        
           placeholderTextColor="#b4b4b4"
-    
+
         />
       </View>
       <View style={styles.userID1}>
-        <View style={styles.rectangleView1} />
-        <Text style={styles.userID}>User ID</Text>
-        <TextInput
-          style={styles.userIdEMailRailwaycot}
-          placeholder="User id/ e-mail @railway.co.th"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          keyboardType="default"
-          placeholderTextColor="#b4b4b4"
-        />
-        
-      </View>
+  <View style={styles.rectangleView1}>
+    <Text style={styles.userID}>User ID</Text>
+    <TextInput
+      style={styles.userIdEMailRailwaycot}
+      placeholder="User id/ e-mail @railway.co.th"
+      value={email}
+      onChangeText={text => setEmail(text)}
+      keyboardType="default"
+      placeholderTextColor="#b4b4b4"
+    />
+  </View>
+</View>
       <Text style={styles.forgotPassword}>Forgot password ?</Text>
       <Text style={styles.checkRegistrationStatus}>
         Check registration status
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
   password1: {
     position: "absolute",
     top: 15,
-    left: 25,
+    left: 5,
   },
   password2: {
     position: "absolute",
@@ -274,7 +273,7 @@ const styles = StyleSheet.create({
   },
   userID: {
     position: "absolute",
-    top: 0,
+    top: -20,
     left: 0,
     fontSize: 12,
     fontWeight: "700",
@@ -289,8 +288,8 @@ const styles = StyleSheet.create({
   },
   userIdEMailRailwaycot: {
     position: "absolute",
-    top: 15,
-    left: 16,
+    top: -5,
+    left: 5,
     
   },
   userID1: {
