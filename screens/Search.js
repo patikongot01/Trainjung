@@ -28,7 +28,6 @@ const Search = () => {
   const navigation = useNavigation();
 
   return ( <View style={styles.homeBG}>
-    <ScrollView>
     <View style={styles.search2}>
       <StatusBar barStyle="default" />
       <View style={styles.background} />
@@ -123,7 +122,6 @@ const Search = () => {
         </Pressable>
       </Pressable>
     </View>
-    </ScrollView>
     </View>
   );
 };
