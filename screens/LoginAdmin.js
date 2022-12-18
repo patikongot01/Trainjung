@@ -1,4 +1,5 @@
-import * as React from "react";
+//import * as React from "react";
+import React, {createContext,useContext, useState} from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -7,12 +8,76 @@ import {
   Text,
   TextInput,
   Pressable,
+  Button,
+  TouchableOpacity,
+ 
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
+import * as FileSystem from 'expo-file-system';
+import LoginContext from './context/LoginContext';
 
 const LoginAdmin = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const onPressDetail = (email, password) => {
+     createUser(email, password);
+     createToken(email, password).then(async response => {
+       if (response.status === 200) {
+         //navigation.navigate("HomeAdmin");
+         navigation.navigate('HomeAdmin', { email: email, password: password });
+         const accessToken = response.json().access_token;
+         FileSystem.writeAsStringAsync(
+         FileSystem.documentDirectory + 'access_token.json',
+         JSON.stringify(accessToken)
 
+     );
+         console.log(data.access_token);
+       } else if (response.status === 401) {
+         // Invalid credentials
+         console.log("Invalid credentials");
+       } else {
+         // Other error
+         console.log("Login failed:", response.status, response.statusText);
+       }
+     });
+    
+    
+      
+   
+  };
+  
+  
+
+
+  
+  const createUser = (email, password) => {
+    axios.post('https://shark-app-wblp9.ondigitalocean.app/api/users', {
+      email: email,
+      idStation: 0,
+      stationName: 'string',
+      hashed_password: password,
+    }, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+  
+  
+  const createToken = (email, password) => {
+    return axios.post('https://shark-app-wblp9.ondigitalocean.app/api/token', `grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=`, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-API-ID': 'email',
+        'X-API-Password': 'password',
+      },
+    });
+  };
+  
   return (
     <View style={styles.loginAdmin}>
       <StatusBar barStyle="default" />
@@ -28,15 +93,20 @@ const LoginAdmin = () => {
         </View>
       </View>
       <Text style={styles.login}>Login</Text>
+
       <View style={styles.password2}>
         <View style={styles.rectangleView} />
-        <Text style={styles.password}>Password</Text>
+        <Text style={styles.password0}>Password</Text>
         <TextInput
           style={styles.password1}
           placeholder="Password"
-          keyboardType="default"
+          value={password}
+          onChangeText={text =>setPassword(text)}
           secureTextEntry
+          keyboardType="default"
+        
           placeholderTextColor="#b4b4b4"
+    
         />
       </View>
       <View style={styles.userID1}>
@@ -45,21 +115,30 @@ const LoginAdmin = () => {
         <TextInput
           style={styles.userIdEMailRailwaycot}
           placeholder="User id/ e-mail @railway.co.th"
+          value={email}
+          onChangeText={text => setEmail(text)}
           keyboardType="default"
           placeholderTextColor="#b4b4b4"
         />
+        
       </View>
       <Text style={styles.forgotPassword}>Forgot password ?</Text>
       <Text style={styles.checkRegistrationStatus}>
         Check registration status
       </Text>
+     
       <Pressable
-        style={styles.buttonLogin}
-        onPress={() => navigation.navigate("HomeAdmin")}
-      >
-        <Pressable style={styles.backgroundButton} />
-        <Text style={styles.login1}>Login</Text>
-      </Pressable>
+  style={styles.buttonLogin}
+  //onPress={() => navigation.navigate("HomeAdmin")} 
+  onPress={() => onPressDetail(email, password)}>
+    <LoginContext.Provider value={{ email, password }}>
+      {/* components that need access to email and password go here */}
+    </LoginContext.Provider>
+  <Pressable style={styles.backgroundButton} />
+  <Text style={styles.login1}>Login</Text>
+</Pressable>
+
+     
     </View>
   );
 };
@@ -152,7 +231,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 40,
   },
-  password: {
+  password0: {
     position: "absolute",
     top: 0,
     left: 0,
@@ -296,4 +375,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginAdmin;
+
+
+export default LoginAdmin ;
+
