@@ -15,44 +15,14 @@ import Favourite from './Favourite';
 import * as RNFS from 'react-native-fs';
 
 const Detail = ({route, props}) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [bookMarkData, setbookMarkData] = useState([]);
   const navigation = useNavigation();
-  const onPressTable = (number) => {
-    navigation.navigate('TimeTable', {number: number})
+  const onPressTable = (number, name, nameDes) => {
+    navigation.navigate('TimeTable', {number: number, name: name, nameDes: nameDes})
   }
 
-  const handlePressFavourite = () => {
-    writeFavoriteJson();
-    AlertFavorite();
-  };
-
-  const dataFavorite = {
-    key: number,
-    number: number,
-    name: name,
-    time: time,
-    nameDes: nameDes,
-    timeDes: timeDes,
-  };
-
-  const writeFavoriteJson = () => {
-    var path = "../dataclient/favoriteData.json";
-    RNFS.writeFile(path, dataFavorite, 'utf8')
-     .then(() => console.log('FILE WRITTEN!'))
-     .catch((err) => console.log(err.message));
- }
-
-  const AlertFavorite = () =>
-  Alert.alert(
-    "Add to Favorite Success",
-    "Train No."+route.params.number+" "+route.params.name+" - "+route.params.nameDes,
-    [
-      { text: "OK", onPress: () => console.log("OK Pressed") }
-    ]
-  );
-
-
   const handlePressBookmark = () => {
+    writeBookmarkJson();
     AlertBookmark();
   };
   const  number =  route.params.number;
@@ -70,20 +40,37 @@ const Detail = ({route, props}) => {
     timeDes: timeDes,
   };
 
+  var path = RNFS.DocumentDirectoryPath + 'BookmarkData.json';
+  const writeBookmarkJson = () => {
+    RNFS.writeFile(path, dataBookmark, 'utf8')
+     .then(() => console.log('FILE WRITTEN!'))
+     .catch((err) => console.log(err.message));
+ }
 
-  const filePath = `../dataclient/favoriteData.json`;
-  const WriteJson = (data) =>
-      fs.writeFile(filePath, JSON.stringify(data), 'utf8')
-      .then(() => console.log('File written!'))
-      .catch(error => console.error(error));
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      // Read the JSON file
+      const fileData = await RNFS.readFileAssets(path);
+      // Parse the JSON string into an object
+      const jsonData = JSON.parse(fileData);
+      setbookMarkData(jsonData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchData();
+}, []);
+
+console.log(bookMarkData)
 
 
   const AlertBookmark = () =>
   Alert.alert(
-    "Add to Bookmark Success",
-    "Train No."+route.params.number+" "+route.params.name+" - "+route.params.nameDes,
+    "⭐ เพิ่มเข้าบุ๊กมาร์กสำเร็จ",
+    "เลขขบวน"+route.params.number+" "+route.params.name+" - "+route.params.nameDes,
     [
-      { text: "OK", onPress: () => console.log("OK Pressed") }
+      { text: "ตกลง", onPress: () => console.log("OK Pressed") }
     ]
   );
 
@@ -91,7 +78,7 @@ const Detail = ({route, props}) => {
     <View style={styles.homeBG}>
     <View style={styles.detail}>
       <StatusBar barStyle="default" />
-      <Text style={styles.trainDetails}>Train Details</Text>
+      <Text style={styles.trainDetails}>รายละเอียดการเดินรถ</Text>
       <Image
         style={styles.imgIcon}
         resizeMode="cover"
@@ -113,9 +100,9 @@ const Detail = ({route, props}) => {
       </Text>
       <Pressable
         style={styles.viewsNo275TimeTable1}
-        onPress={() => onPressTable(route.params.number)}
+        onPress={() => onPressTable(route.params.number, name, nameDes)}
       >
-        <Text style={styles.viewsNo275TimeTable}>Views No. {route.params.number} Time Table</Text>
+        <Text style={styles.viewsNo275TimeTable}>ดูตารางการเดินรถของเลขขบวน {route.params.number}</Text>
       </Pressable>
       
       <Pressable
@@ -123,7 +110,7 @@ const Detail = ({route, props}) => {
         onPress={() => onPressTable(item.number)}
       >
         <View style={styles.rectangleView1} />
-        <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
+        <Text style={styles.oRDINARY}>{`รถไฟรางปกติ `}</Text>
         <Text style={styles.nO275}>{`No. `}{route.params.number}</Text>
         <Image
           style={styles.vectorIcon}
@@ -131,8 +118,8 @@ const Detail = ({route, props}) => {
           source={require("../assets/vector1.png")}
         />
         <Text style={styles.bangkok}>{route.params.name}</Text>
-        <Text style={styles.arr}>Arr.</Text>
-        <Text style={styles.dep}>Dep.</Text>
+        <Text style={styles.arr}>ต้นทาง</Text>
+        <Text style={styles.dep}>ปลายทาง</Text>
         <Text style={styles.nameDes}>{route.params.nameDes}</Text>
       </Pressable>
       <View style={styles.BackTable} ></View>
@@ -189,15 +176,9 @@ const Detail = ({route, props}) => {
           <Text style={styles.labelText3}>Bookmark</Text>
         </Pressable>
       </Pressable>
-      <View style={styles.AddFavoriteBotton}>
-          <Button
-            title={'Add Favorite'}
-            onPress={handlePressFavourite}
-          />
-        </View>
         <View style={styles.AddBookmarkBotton}>
           <Button
-            title={'Add Bookmark'}
+            title={'⭐ เพิ่มเข้าบุ๊กมาร์ก'}
             onPress={handlePressBookmark}
           />
         </View>
@@ -230,7 +211,7 @@ const styles = StyleSheet.create({
   AddBookmarkBotton: {
     position: "absolute",
     top: 435,
-    left: 180,
+    left: 118,
     fontSize: 25,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -249,7 +230,7 @@ const styles = StyleSheet.create({
   trainDetails: {
     position: "absolute",
     top: 53,
-    left: 106,
+    left: 66,
     fontSize: 25,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -274,14 +255,14 @@ const styles = StyleSheet.create({
   },
   ellipseIcon: {
     position: "absolute",
-    top: 404,
+    top: 410,
     left: 173,
     width: 5,
     height: 5,
   },
   ellipseIcon1: {
     position: "absolute",
-    top: 404,
+    top: 410,
     left: 183,
     width: 5,
     height: 5,
@@ -303,7 +284,8 @@ const styles = StyleSheet.create({
   },
   viewsNo275TimeTable: {
     top: 40,
-    fontSize: 10,
+    left: -28,
+    fontSize: 12,
     textDecoration: "underline",
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -327,7 +309,7 @@ const styles = StyleSheet.create({
   oRDINARY: {
     position: "absolute",
     top: 69,
-    left: 137,
+    left: 132,
     fontSize: 10,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -378,7 +360,7 @@ const styles = StyleSheet.create({
   dep: {
     position: "absolute",
     top: 20,
-    left: 254,
+    left: 210,
     fontSize: 12,
     fontFamily: "Istok Web",
     color: "#fff",

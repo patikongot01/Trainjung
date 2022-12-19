@@ -12,14 +12,13 @@ import { useNavigation } from "@react-navigation/native";
 const Bookmark = () => {
   const navigation = useNavigation();
 
+  const onPressDetail = (number, name, nameDes, time, timeDes) => {
+    navigation.navigate('Detail', {number: number, name: name, nameDes: nameDes, time: time, timeDes: timeDes})
+  }
+
   return ( <View style={styles.bookmarkBG}>
     <View style={styles.bookmark2}>
       <StatusBar barStyle="default" />
-      <Image
-        style={styles.backIcon}
-        resizeMode="cover"
-        source={require("../assets/back.png")}
-      />
       <View style={styles.rectangleView} />
       <Text style={styles.bookmark}>Bookmark</Text>
       <Pressable style={styles.delete}>
@@ -32,7 +31,7 @@ const Bookmark = () => {
       </Pressable>
       <Pressable
         style={styles.detail}
-        onPress={() => navigation.navigate("Bookmark2")}
+        onPress={() => onPressDetail(item.number,nameofTrainFrom,nameofTrainTo,item.Time[0].time,item.Time[2].time)}
       >
         <View style={styles.groupView}>
           <View style={styles.rectangleView2} />
@@ -62,12 +61,19 @@ const Bookmark = () => {
           />
         </View>
       </Pressable>
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/back.png")}
+        />
+      </Pressable>
       <View style={styles.bottomTab}>
         <Pressable
           style={styles.home}
           onPress={() => navigation.navigate("Home")}
         >
-          <Text style={styles.labelText}>Home</Text>
+          <Text style={styles.labelText}>หน้าหลัก</Text>
           <Image
             style={styles.icon}
             resizeMode="cover"
@@ -78,22 +84,11 @@ const Bookmark = () => {
           style={[styles.search, styles.ml42]}
           onPress={() => navigation.navigate("Search")}
         >
-          <Text style={styles.labelText1}>Search</Text>
+          <Text style={styles.labelText1}>ค้นหา</Text>
           <Image
             style={styles.vectorIcon2}
             resizeMode="cover"
             source={require("../assets/vector2.png")}
-          />
-        </Pressable>
-        <Pressable
-          style={[styles.favourite, styles.ml42]}
-          onPress={() => navigation.navigate("Favourite")}
-        >
-          <Text style={styles.labelText2}>Favourite</Text>
-          <Image
-            style={styles.vectorIcon3}
-            resizeMode="cover"
-            source={require("../assets/vector3.png")}
           />
         </Pressable>
         <Pressable
@@ -105,7 +100,7 @@ const Bookmark = () => {
             resizeMode="cover"
             source={require("../assets/group-2932.png")}
           />
-          <Text style={styles.labelText3}>Bookmark</Text>
+          <Text style={styles.labelText3}>บุ๊กมาร์ก</Text>
         </Pressable>
       </View>
     </View>
@@ -115,7 +110,7 @@ const Bookmark = () => {
 
 const styles = StyleSheet.create({
   ml42: {
-    marginLeft: 42,
+    marginLeft: 87,
   },
   backIcon: {
     position: "absolute",
@@ -146,6 +141,15 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 12,
     shadowOpacity: 1,
+  },
+  back: {
+    position: "absolute",
+    left: "5.56%",
+    top: "7.88%",
+    right: "90.12%",
+    bottom: "90.23%",
+    width: "10.33%",
+    height: "3.9%",
   },
   bookmark: {
     position: "absolute",
@@ -358,7 +362,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#bbb",
@@ -390,7 +394,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#bbb",
@@ -464,7 +468,7 @@ const styles = StyleSheet.create({
     width: "100%",
     top: "56.76%",
     left: "0%",
-    fontSize: 10,
+    fontSize: 9,
     letterSpacing: 1,
     lineHeight: 16,
     fontWeight: "700",

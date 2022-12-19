@@ -17,19 +17,21 @@ const Search2 = ({Navigation, route}) => {
   const [ itemsName, setItemsName] = useState([])
   const from = route.params.from;
   const to = route.params.to;
+  const nameofTrain = ['กรุงเทพ','อุรุพงษ์','พญาไท','มักกะสัน','ราชปรารภ','อโศก','คลองตัน','สุขุมวิท','หัวหมาก','บ้านทับช้าง','ซอยวัดลานบุญ','ลาดกระบัง','พระจอมเกล้า','หัวตะเข้','คลองหลวงแพ่ง','คลองอุดมชลจร','เปรง','คลองแขวงกลั่น','คลองบางพระ','บางเตย','ชุมทางฉะเชิงเทรา','ดอนสีนนท์','บางน้ำเปรี้ยว','ชุมทางคลองสิบเก้า','พานทอง','โยทะกา','บ้านสร้าง','ชลบุรี','บ้านปากพลี','บางพระ','ปราจีนบุรี','เขาพระบาท','โคกมะกอก','ชุมทางศรีราชา','ประจันตคาม','บางละมุง','บ้านดงบัง','บ้านพรหมแสง','พัทยา','พัทยาใต้','กบินทร์บุรี','บ้านห้วยขวาง','ญาณสังวราราม','หนองสัง','สวนนงนุช','ชุมทางเขาชีจรรย์','บ้านพลูตาหลวง','พระปรง','บ้านแก้ง','ศาลาลำดวน','สระแก้ว','ท่าเกษม','ห้วยโจด','วัฒนานคร','ห้วยเดื่อ','อรัญประเทศ']
   useEffect(() => {
     fetch('https://shark-app-wblp9.ondigitalocean.app/allStationAtoB/'+route.params.from+'/'+route.params.to)
         .then(res => res.json())
         .then((result) => {
           setItems(result)
         })
-    fetch('https://shark-app-wblp9.ondigitalocean.app/NameOfTrain')
+    fetch('https://shark-app-wblp9.ondigitalocean.app/NameOfTrain2')
         .then(res => res.json())
         .then((result) => {
           setItemsName(result)
         })
       }, [])
-
+  const nameofTrainFrom = nameofTrain[from-1];
+  const nameofTrainTo = nameofTrain[to-1];
   const onPressDetail = (number, name, nameDes, time, timeDes) => {
     navigation.navigate('Detail', {number: number, name: name, nameDes: nameDes, time: time, timeDes: timeDes})
   }
@@ -44,29 +46,29 @@ const Search2 = ({Navigation, route}) => {
             <View style={{height: 140}}>
             <Pressable
               style={styles.detail}
-              onPress={() => onPressDetail(item.number,item.number,item.number,item.Time[0].time,item.Time[2].time)}
+              onPress={() => onPressDetail(item.number,nameofTrainFrom,nameofTrainTo,item.Time[0].time,item.Time[2].time)}
             >
               <View style={styles.groupView21}>
                 <View style={styles.rectangleView14} />
                 <View style={styles.rectangleView15} />
               </View>
-              <Text style={styles.oRDINARY7}>{`ORDINARY `}</Text>
-              <Text style={styles.nO275}>{`NO. `}{item.number}</Text>
+              <Text style={styles.oRDINARY7}>{`รถไฟรางปกติ `}</Text>
+              <Text style={styles.nO275}>{`เลขขบวน`} {item.number}</Text>
               <Image
                 style={styles.vectorIcon7}
                 resizeMode="cover"
                 source={require("../assets/vector22.png")}
               />
               <Text style={styles.bangkokBanKlongLukBorder1}>
-                Bangkok - Ban Klong Luk Border
+              {nameofTrainFrom} - {nameofTrainTo}
               </Text>
               <View style={styles.groupView22}>
-                <Text style={styles.bangkok7}>Bangkok</Text>
+                <Text style={styles.bangkok7}>{nameofTrainFrom}</Text>
                 <Text style={styles.text14}>{item.Time[0].time}</Text>
                 <Text style={styles.arr7}>Arr.</Text>
                 <Text style={styles.dep7}>Dep.</Text>
                 <Text style={styles.text15}>{item.Time[2].time}</Text>
-                <Text style={styles.praChomKlao7}>Pra Chom Klao</Text>
+                <Text style={styles.praChomKlao7}>{nameofTrainTo}</Text>
                 <Image
                   style={styles.arrowIcon7}
                   resizeMode="cover"
@@ -83,7 +85,7 @@ const Search2 = ({Navigation, route}) => {
       </View>
       <View style={styles.bGTOp} />
       <Text style={styles.arrStation}>สถานีต้นทาง</Text>
-      <Text style={styles.bangkok8}>....</Text>
+      <Text style={styles.bangkok8}>{nameofTrainFrom}</Text>
       <View style={styles.frameView1}>
         <Image
           style={styles.sysbolIcon}
@@ -91,14 +93,21 @@ const Search2 = ({Navigation, route}) => {
           source={require("../assets/sysbol.png")}
         />
       </View>
-      <Text style={styles.banKlongLukBorder}>.......</Text>
+      <Text style={styles.banKlongLukBorder}>{nameofTrainTo}</Text>
       <Text style={styles.depStation}>สถานีปลายทาง</Text>
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/back.png")}
+        />
+      </Pressable>
       <View style={styles.bottomTab}>
         <Pressable
           style={styles.home}
           onPress={() => navigation.navigate("Home")}
         >
-          <Text style={styles.labelText}>Home</Text>
+          <Text style={styles.labelText}>หน้าหลัก</Text>
           <Image
             style={styles.icon}
             resizeMode="cover"
@@ -109,22 +118,11 @@ const Search2 = ({Navigation, route}) => {
           style={[styles.search, styles.ml42]}
           onPress={() => navigation.navigate("Search")}
         >
-          <Text style={styles.labelText1}>Search</Text>
+          <Text style={styles.labelText1}>ค้นหา</Text>
           <Image
             style={styles.vectorIcon8}
             resizeMode="cover"
             source={require("../assets/vector10.png")}
-          />
-        </Pressable>
-        <Pressable
-          style={[styles.favourite, styles.ml42]}
-          onPress={() => navigation.navigate("Favourite")}
-        >
-          <Text style={styles.labelText2}>Favourite</Text>
-          <Image
-            style={styles.vectorIcon9}
-            resizeMode="cover"
-            source={require("../assets/vector3.png")}
           />
         </Pressable>
         <Pressable
@@ -136,22 +134,17 @@ const Search2 = ({Navigation, route}) => {
             resizeMode="cover"
             source={require("../assets/group-29321.png")}
           />
-          <Text style={styles.labelText3}>Bookmark</Text>
+          <Text style={styles.labelText3}>บุ๊กมาร์ก</Text>
         </Pressable>
       </View>
       <StatusBar barStyle="default" />
-      <Pressable
-        style={styles.back}
-        onPress={() => navigation.navigate("Home")}
-      >
-      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   ml42: {
-    marginLeft: 42,
+    marginLeft: 87,
   },
   rectangleView: {
     position: "absolute",
@@ -1104,6 +1097,15 @@ const styles = StyleSheet.create({
     width: 296,
     height: 115,
   },
+  back: {
+    position: "absolute",
+    left: "5.56%",
+    top: "7.88%",
+    right: "90.12%",
+    bottom: "90.23%",
+    width: "10.33%",
+    height: "3.9%",
+  },
   rectangleView12: {
     position: "absolute",
     top: 0,
@@ -1310,7 +1312,7 @@ const styles = StyleSheet.create({
   },
   oRDINARY7: {
     position: "absolute",
-    top: 25,
+    top: 27,
     left: 42,
     fontSize: 10,
     fontWeight: "700",
@@ -1461,7 +1463,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#bbb",
@@ -1493,7 +1495,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#f05a22",
@@ -1567,7 +1569,7 @@ const styles = StyleSheet.create({
     width: "100%",
     top: "56.76%",
     left: "0%",
-    fontSize: 10,
+    fontSize: 9,
     letterSpacing: 1,
     lineHeight: 16,
     fontWeight: "700",

@@ -107,8 +107,8 @@ const [ itemsName, setItemsName] = useState([])
           <View style={styles.rectangleView4} />
           <View style={styles.rectangleView5} />
         </View>
-        <Text style={styles.oRDINARY2}>{`ORDINARY `}</Text>
-        <Text style={styles.nO283}>No.{item.number}</Text>
+        <Text style={styles.oRDINARY2}>{`รถไฟรางปกติ `}</Text>
+        <Text style={styles.nO283}>เลขขบวน {item.number}</Text>
         <Image
           style={styles.vectorIcon2}
           resizeMode="cover"
@@ -137,8 +137,8 @@ const [ itemsName, setItemsName] = useState([])
       </View>
         <View style={styles.groupView}>
         <View style={styles.homeBGOR} />
-        <Text style={styles.home}>Home</Text>
-        <Text style={styles.welcomeToTrainjung}>Welcome to trainjung</Text>
+        <Text style={styles.home}>หน้าหลัก</Text>
+        <Text style={styles.welcomeToTrainjung}>ยินดีตอนรับเข้าสู่ Trainjung</Text>
       </View>
       <Pressable
         style={styles.notiBotton}
@@ -151,7 +151,7 @@ const [ itemsName, setItemsName] = useState([])
         />
       </Pressable>
       <StatusBar barStyle="default" />
-      <Text style={styles.available}>Available</Text>
+      <Text style={styles.available}>รถที่พร้อมบริการ</Text>
       <Image
         style={styles.groupIcon2}
         resizeMode="cover"
@@ -162,7 +162,7 @@ const [ itemsName, setItemsName] = useState([])
         onPress={() => navigation.navigate("Home")}
       >
         <View style={styles.home1}>
-          <Text style={styles.labelText}>Home</Text>
+          <Text style={styles.labelText}>หน้าหลัก</Text>
           <Image
             style={styles.icon1}
             resizeMode="cover"
@@ -173,22 +173,11 @@ const [ itemsName, setItemsName] = useState([])
           style={[styles.search, styles.ml42]}
           onPress={() => navigation.navigate("Search")}
         >
-          <Text style={styles.labelText1}>Search</Text>
+          <Text style={styles.labelText1}>ค้นหา</Text>
           <Image
             style={styles.vectorIcon3}
             resizeMode="cover"
             source={require("../assets/vector2.png")}
-          />
-        </Pressable>
-        <Pressable
-          style={[styles.favourite, styles.ml42]}
-          onPress={() => navigation.navigate("Favourite")}
-        >
-          <Text style={styles.labelText2}>Favourite</Text>
-          <Image
-            style={styles.vectorIcon4}
-            resizeMode="cover"
-            source={require("../assets/vector3.png")}
           />
         </Pressable>
         <Pressable
@@ -200,21 +189,9 @@ const [ itemsName, setItemsName] = useState([])
             resizeMode="cover"
             source={require("../assets/group-29321.png")}
           />
-          <Text style={styles.labelText3}>Bookmark</Text>
+          <Text style={styles.labelText3}>บุ๊กมาร์ก</Text>
         </Pressable>
       </Pressable>
-      <View style={styles.dropDownHome}>
-        <DropDownPicker
-          open={dropDownHomeOpen}
-          setOpen={setDropDownHomeOpen}
-          value={dropDownHomeValue}
-          setValue={setDropDownHomeValue}
-          placeholder="Station Name"
-          items={dropDownHomeItems}
-          labelStyle={styles.dropDownHomeValue}
-          textStyle={styles.dropDownHomeText}
-        />
-      </View>
     </View>
   </View>
   );
@@ -222,7 +199,7 @@ const [ itemsName, setItemsName] = useState([])
 
 const styles = StyleSheet.create({
   ml42: {
-    marginLeft: 42,
+    marginLeft: 87,
   },
   dropDownHomeValue: {
     color: "#030303",
@@ -686,7 +663,7 @@ const styles = StyleSheet.create({
   },
   oRDINARY2: {
     position: "absolute",
-    top: 25,
+    top: 27,
     left: 42,
     fontSize: 10,
     fontWeight: "700",
@@ -848,7 +825,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#f05a22",
@@ -880,7 +857,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#bbb",
@@ -954,7 +931,7 @@ const styles = StyleSheet.create({
     width: "100%",
     top: "56.76%",
     left: "0%",
-    fontSize: 10,
+    fontSize: 9,
     letterSpacing: 1,
     lineHeight: 16,
     fontWeight: "700",

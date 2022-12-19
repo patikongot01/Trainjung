@@ -1,4 +1,5 @@
-import * as React from "react";
+//import * as React from "react";
+import React, {createContext,useContext, useState} from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -7,12 +8,77 @@ import {
   Text,
   TextInput,
   Pressable,
+  Button,
+  TouchableOpacity,
+ 
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
+import * as FileSystem from 'expo-file-system';
+import { setGenericPassword } from 'react-native-keychain';
+import { Keychain } from 'react-native-keychain';
 
 const LoginAdmin = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const onPressDetail = (email, password) => {
+     createUser(email, password);
+     createToken(email, password).then(async response => {
+       if (response.status === 200) {
+         //navigation.navigate("HomeAdmin");
+         navigation.navigate('AddStatus', {email: email, password: password})
+         navigation.navigate('HomeAdmin', { email: email, password: password });
+         const accessToken = response.json().access_token;
+        storeAccessToken(accessToken);
+     
+       } else if (response.status === 401) {
+         // Invalid credentials
+         console.log("Invalid credentials");
+       } else {
+         // Other error
+         console.log("Login failed:", response.status, response.statusText);
+       }
+     });
 
+  };
+  const storeAccessToken = async (accessToken) => {
+    try {
+      await Keychain.setGenericPassword('access_token', accessToken);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
+
+  
+  const createUser = (email, password) => {
+    axios.post('https://shark-app-wblp9.ondigitalocean.app/api/users', {
+      email: email,
+      idStation: 0,
+      stationName: 'string',
+      hashed_password: password,
+    }, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+  
+  
+  const createToken = (email, password) => {
+    return axios.post('https://shark-app-wblp9.ondigitalocean.app/api/token', `grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=`, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-API-ID': 'email',
+        'X-API-Password': 'password',
+      },
+    });
+  };
+  
   return (
     <View style={styles.loginAdmin}>
       <StatusBar barStyle="default" />
@@ -28,38 +94,48 @@ const LoginAdmin = () => {
         </View>
       </View>
       <Text style={styles.login}>Login</Text>
+
       <View style={styles.password2}>
         <View style={styles.rectangleView} />
-        <Text style={styles.password}>Password</Text>
+        <Text style={styles.password0}>Password</Text>
         <TextInput
           style={styles.password1}
           placeholder="Password"
-          keyboardType="default"
+          value={password}
+          onChangeText={text =>setPassword(text)}
           secureTextEntry
+          keyboardType="default"
           placeholderTextColor="#b4b4b4"
+          maxLength={6}
+
         />
       </View>
       <View style={styles.userID1}>
-        <View style={styles.rectangleView1} />
-        <Text style={styles.userID}>User ID</Text>
-        <TextInput
-          style={styles.userIdEMailRailwaycot}
-          placeholder="User id/ e-mail @railway.co.th"
-          keyboardType="default"
-          placeholderTextColor="#b4b4b4"
-        />
-      </View>
+  <View style={styles.rectangleView1}>
+    <Text style={styles.userID}>User ID</Text>
+    <TextInput
+      style={styles.userIdEMailRailwaycot}
+      placeholder="User id/ e-mail @railway.co.th"
+      value={email}
+      onChangeText={text => setEmail(text)}
+      keyboardType="default"
+      placeholderTextColor="#b4b4b4"
+    />
+  </View>
+</View>
       <Text style={styles.forgotPassword}>Forgot password ?</Text>
       <Text style={styles.checkRegistrationStatus}>
         Check registration status
       </Text>
+     
       <Pressable
-        style={styles.buttonLogin}
-        onPress={() => navigation.navigate("HomeAdmin")}
-      >
-        <Pressable style={styles.backgroundButton} />
-        <Text style={styles.login1}>Login</Text>
-      </Pressable>
+  style={styles.buttonLogin}
+  //onPress={() => navigation.navigate("HomeAdmin")} 
+  onPress={() => onPressDetail(email, password)}>
+  <Pressable style={styles.backgroundButton} />
+  <Text style={styles.login1}>Login</Text>
+</Pressable>
+
     </View>
   );
 };
@@ -152,7 +228,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 40,
   },
-  password: {
+  password0: {
     position: "absolute",
     top: 0,
     left: 0,
@@ -170,7 +246,7 @@ const styles = StyleSheet.create({
   password1: {
     position: "absolute",
     top: 15,
-    left: 25,
+    left: 5,
   },
   password2: {
     position: "absolute",
@@ -195,7 +271,7 @@ const styles = StyleSheet.create({
   },
   userID: {
     position: "absolute",
-    top: 0,
+    top: -20,
     left: 0,
     fontSize: 12,
     fontWeight: "700",
@@ -210,8 +286,8 @@ const styles = StyleSheet.create({
   },
   userIdEMailRailwaycot: {
     position: "absolute",
-    top: 15,
-    left: 16,
+    top: -5,
+    left: 5,
     
   },
   userID1: {
@@ -296,4 +372,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginAdmin;
+
+
+export default LoginAdmin ;
+

@@ -154,7 +154,7 @@ const Search = () => {
       <View style={styles.dropDown}>
         <Pressable style={styles.buttonSearch} onPress={() => onPressDetail(buttonFromValue,buttonToValue)}>
           <View style={styles.backgroundButton} />
-          <Text style={styles.search}>Search</Text>
+          <Text style={styles.search}>ค้นหา</Text>
         </Pressable>
         <View style={styles.buttonFrom}>
           <DropDownPicker
@@ -198,7 +198,7 @@ const Search = () => {
         onPress={() => navigation.navigate("Home")}
       >
         <View style={styles.home}>
-          <Text style={styles.labelText}>Home</Text>
+          <Text style={styles.labelText}>หน้าหลัก</Text>
           <Image
             style={styles.icon1}
             resizeMode="cover"
@@ -206,24 +206,13 @@ const Search = () => {
           />
         </View>
         <View style={[styles.search1, styles.ml42]}>
-          <Text style={styles.labelText1}>Search</Text>
+          <Text style={styles.labelText1}>ค้นหา</Text>
           <Image
             style={styles.vectorIcon}
             resizeMode="cover"
             source={require("../assets/vector10.png")}
           />
         </View>
-        <Pressable
-          style={[styles.favourite, styles.ml42]}
-          onPress={() => navigation.navigate("Favourite")}
-        >
-          <Text style={styles.labelText2}>Favourite</Text>
-          <Image
-            style={styles.vectorIcon1}
-            resizeMode="cover"
-            source={require("../assets/vector3.png")}
-          />
-        </Pressable>
         <Pressable
           style={[styles.bookmark, styles.ml42]}
           onPress={() => navigation.navigate("Bookmark")}
@@ -233,7 +222,7 @@ const Search = () => {
             resizeMode="cover"
             source={require("../assets/group-29321.png")}
           />
-          <Text style={styles.labelText3}>Bookmark</Text>
+          <Text style={styles.labelText3}>บุ๊กมาร์ก</Text>
         </Pressable>
       </Pressable>
     </View>
@@ -252,7 +241,7 @@ const styles = StyleSheet.create({
     fontFamily: "Istok Web",
   },
   ml42: {
-    marginLeft: 42,
+    marginLeft: 87,
   },
   background: {
     position: "absolute",
@@ -398,7 +387,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#bbb",
@@ -430,7 +419,7 @@ const styles = StyleSheet.create({
     left: "0%",
     fontSize: 10,
     letterSpacing: 1,
-    lineHeight: 16,
+    lineHeight: 17,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#f05a22",
@@ -504,7 +493,7 @@ const styles = StyleSheet.create({
     width: "100%",
     top: "56.76%",
     left: "0%",
-    fontSize: 10,
+    fontSize: 9,
     letterSpacing: 1,
     lineHeight: 16,
     fontWeight: "700",

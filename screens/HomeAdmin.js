@@ -1,4 +1,5 @@
-import * as React from "react";
+//import * as React from "react";
+import { FileSystem } from 'expo';
 import {
   StatusBar,
   StyleSheet,
@@ -9,10 +10,73 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
 
+import { useRoute } from '@react-navigation/native';
 const HomeAdmin = () => {
   const navigation = useNavigation();
+  const [stationName, setStationName] = useState('');
+  const route = useRoute();
+  const email = route.params.email;
+  const password = route.params.password;
+  const onPressDetail = (email , password) => {
+    navigation.navigate('AddStatus', {email: email, password: password});
+  }
+ 
+  
 
+const createToken = async (email, password) => {
+  try {
+    const data = {
+      grant_type: '',
+      username: email,
+      password: password,
+      scope: '',
+      client_id: '',
+      client_secret: '',
+    };
+    
+    const response = await axios.post('https://shark-app-wblp9.ondigitalocean.app/api/token', data, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-API-ID': String,
+        'X-API-Password': String,
+      },
+    });
+
+    return response.data.access_token;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const fetchData = async () => {
+  try {
+    // Call the createToken function to get an access token
+    const accessToken = await createToken(email, password);
+    console.log(email, password);
+    // Use the access token in the request
+    const response = await axios.get('https://shark-app-wblp9.ondigitalocean.app/api/users/me', {
+      headers: {
+        'accept': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+    const data = response.data;
+    const stationName = data.stationName;
+    setStationName(stationName);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+  
   return (
     <View style={styles.homeAdmin}>
       <StatusBar barStyle="default" />
@@ -22,7 +86,7 @@ const HomeAdmin = () => {
       >
         <View style={styles.rectangleView} />
         <Text style={styles.trainjung}>Trainjung</Text>
-        <Text style={styles.bangkokStation}>Bangkok Station</Text>
+        <Text style={styles.bangkokStation}>{stationName}</Text>
         <Text style={styles.admin}>Admin</Text>
         <Image
           style={styles.groupIcon}
@@ -33,38 +97,17 @@ const HomeAdmin = () => {
       <TouchableOpacity
         style={styles.groupTouchableOpacity}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("AddStatus")}
+        onPress={() => onPressDetail(email, password)}
       >
         <TouchableOpacity
           style={styles.rectangleTouchableOpacity}
           activeOpacity={0.2}
-          onPress={() => navigation.navigate("AddStatus")}
+          onPress={() => onPressDetail(email, password)}
         />
-        <Text style={styles.addStatus}>Add Status</Text>
+        <Text style={styles.addStatus}>Edit Status</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.groupTouchableOpacity1}
-        activeOpacity={0.2}
-        onPress={() => navigation.navigate("HomeAdmin2")}
-      >
-        <TouchableOpacity
-          style={styles.rectangleTouchableOpacity1}
-          activeOpacity={0.2}
-          onPress={() => navigation.navigate("HomeAdmin2")}
-        />
-        <Text style={styles.edit}>{`Edit `}</Text>
-      </TouchableOpacity>
-      <Pressable
-        style={styles.groupPressable1}
-        onPress={() => navigation.navigate("Add")}
-      >
-        <TouchableOpacity
-          style={styles.rectangleTouchableOpacity2}
-          activeOpacity={0.2}
-          onPress={() => navigation.navigate("Add")}
-        />
-        <Text style={styles.addDelete}>Add-Delete</Text>
-      </Pressable>
+      
+      
     </View>
   );
 };
@@ -106,7 +149,7 @@ height: '100%',
     position: "absolute",
     top: 62,
     left: 36,
-    fontSize: 15,
+    fontSize: 30,
     fontWeight: "700",
     fontFamily: "Istok Web",
     color: "#fff",
@@ -139,7 +182,7 @@ height: '100%',
   },
   rectangleTouchableOpacity: {
     position: "absolute",
-    top: 0,
+    top: -200,
     left: 0,
     borderRadius: 10,
     backgroundColor: "#f05a22",
@@ -150,7 +193,7 @@ height: '100%',
   },
   addStatus: {
     position: "absolute",
-    top: 20,
+    top: -180,
     left: 21,
     fontSize: 20,
     fontWeight: "700",
@@ -162,16 +205,16 @@ height: '100%',
   },
   groupTouchableOpacity: {
     position: "absolute",
-    width: 150,
+    width: 250,
     height: 63,
     alignItems: "center",
     justifyContent: "center",
-    top: 469,
+    top: 500,
     left: 115,
   },
   rectangleTouchableOpacity1: {
     position: "absolute",
-    top: 0,
+    top: 100,
     left: 0,
     borderRadius: 10,
     backgroundColor: "#f05a22",
@@ -198,7 +241,7 @@ height: '100%',
   },
   rectangleTouchableOpacity2: {
     position: "absolute",
-    top: 0,
+    top: 100,
     left: 0,
     borderRadius: 10,
     backgroundColor: "#f05a22",

@@ -18,15 +18,15 @@ import Search2 from "./screens/Search2";
 import Search from "./screens/Search";
 import Notification1 from "./screens/Notification1";
 import Home from "./screens/Home";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
   return (
-    <>
+
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -113,7 +113,7 @@ const App = () => {
           </Stack.Navigator>
         ) : null}
       </NavigationContainer>
-    </>
+
   );
 };
 export default App;

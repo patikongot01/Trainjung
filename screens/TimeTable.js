@@ -52,20 +52,20 @@ const widthArr = [30, 130, 50, 100];
       </ScrollView>
       <View style={styles.BGTable}>
       </View>
-      <Text style={styles.timeTable}>Time Table</Text>
+      <Text style={styles.timeTable}>ตารางการเดินรถ</Text>
       <View style={styles.ststus}>
         <View style={styles.groupView}>
           <View style={styles.rectangleView} />
         </View>
-        <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
-        <Text style={styles.nO275}>{`No. `}{route.params.number}</Text>
+        <Text style={styles.oRDINARY}>{`รถไฟรางปกติ `}</Text>
+        <Text style={styles.nO275}>{`เลขขบวน `}{route.params.number}</Text>
         <Image
           style={styles.vectorIcon}
           resizeMode="cover"
           source={require("../assets/vector1.png")}
         />
         <Text style={styles.bangkokBanKlongLukBorder}>
-          Bangkok - Ban Klong Luk Border
+        {route.params.name} - {route.params.nameDes}
         </Text>
       </View>
       <Pressable style={styles.back} onPress={() => navigation.goBack()}>
@@ -75,6 +75,7 @@ const widthArr = [30, 130, 50, 100];
           source={require("../assets/back.png")}
         />
       </Pressable>
+      
       <View style={styles.bottomTab}>
         <Pressable
           style={styles.home}
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
   timeTable: {
     position: "absolute",
     top: 53,
-    left: 115,
+    left: 85,
     fontSize: 25,
     fontWeight: "700",
     fontFamily: "Istok Web",

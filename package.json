@@ -13,11 +13,16 @@
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.6",
     "axios": "^1.2.1",
+    "expo-file-system": "^15.1.1",
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-dropdown": "^0.0.6",
     "react-native-dropdown-picker": "^5.4.3",
     "react-native-fs": "^2.20.0",
+<<<<<<< HEAD
+=======
+    "react-native-keychain": "^8.1.1",
+>>>>>>> 46b89f756e87dda000f8293b9d867bd55f075d9e
     "react-native-paper": "^5.0.1",
     "react-native-popup-menu": "^0.16.1",
     "react-native-safe-area-context": "^4.4.1",
