@@ -12,7 +12,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import React, { useState,useEffect } from 'react';
-import { Keychain } from 'react-native-keychain';
 
 import { useRoute } from '@react-navigation/native';
 const HomeAdmin = () => {
@@ -21,7 +20,9 @@ const HomeAdmin = () => {
   const route = useRoute();
   const email = route.params.email;
   const password = route.params.password;
-  
+  const onPressDetail = (email , password) => {
+    navigation.navigate('AddStatus', {email: email, password: password});
+  }
  
   
 
@@ -35,7 +36,7 @@ const createToken = async (email, password) => {
       client_id: '',
       client_secret: '',
     };
-
+    
     const response = await axios.post('https://shark-app-wblp9.ondigitalocean.app/api/token', data, {
       headers: {
         'accept': 'application/json',
@@ -55,7 +56,7 @@ const fetchData = async () => {
   try {
     // Call the createToken function to get an access token
     const accessToken = await createToken(email, password);
-
+    console.log(email, password);
     // Use the access token in the request
     const response = await axios.get('https://shark-app-wblp9.ondigitalocean.app/api/users/me', {
       headers: {
@@ -96,16 +97,12 @@ useEffect(() => {
       <TouchableOpacity
         style={styles.groupTouchableOpacity}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("AddStatus")}
+        onPress={() => onPressDetail(email, password)}
       >
         <TouchableOpacity
           style={styles.rectangleTouchableOpacity}
           activeOpacity={0.2}
-          onPress={() => {
-            navigation.navigate('AddStatus', {
-              email1: email,
-              password1: password,
-            });}}
+          onPress={() => onPressDetail(email, password)}
         />
         <Text style={styles.addStatus}>Edit Status</Text>
       </TouchableOpacity>

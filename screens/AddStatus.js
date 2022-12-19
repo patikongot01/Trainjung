@@ -19,22 +19,20 @@ const AddStatus = () => {
   const [Destination, setDestination] = useState('');
   const [Detail, setDetail] = useState('');
   const route = useRoute();
-  let email1, password1;
-  if (route && route.params) {
-    email1 = route.params.email;
-    password1 = route.params.password;
-  }
-  const createToken = async (email1, password1) => {
+  const email = route.params.email;
+  const password = route.params.password;
+  console.log(email, password);
+  const createToken = async (email, password) => {
     try {
       const data = {
         grant_type: '',
-        username: email1,
-        password: password1,
+        username: email,
+        password: password,
         scope: '',
         client_id: '',
         client_secret: '',
       };
-  
+      
       const response = await axios.post('https://shark-app-wblp9.ondigitalocean.app/api/token', data, {
         headers: {
           'accept': 'application/json',
@@ -43,7 +41,7 @@ const AddStatus = () => {
           'X-API-Password': String,
         },
       });
-  
+      
       return response.data.access_token;
     } catch (error) {
       console.error(error);
@@ -52,21 +50,23 @@ const AddStatus = () => {
   
   const sendLineNotify = async () => {
     try {
-      const accessToken = await createToken(email1, password1);
-      const response = await axios.post('https://shark-app-wblp9.ondigitalocean.app/Status?trainNumber=275&onTime=true&message=454', {
+      const accessToken = await createToken(email, password);
+      console.log(email, password);
+      const response = await axios.post(`https://shark-app-wblp9.ondigitalocean.app/Status?trainNumber=${Number}&onTime=true&message=${' '+From+' ถึง '+Destination+' '+Detail}`, {
         trainNumber: Number,
         onTime: true,
         message: Detail,
       }, {
         headers: {
           'accept': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjFAcmFpbHdheS5hYy50aCIsImlkU3RhdGlvbiI6MSwic3RhdGlvbk5hbWUiOiJLcmF1bmdUaGVwIiwiaWQiOjF9.5o5sV_Id1kIUVfkt9TX9S22Xri_vshLZcOkSNYZnjKQ`,
+          'Authorization': `Bearer ${accessToken}`,
         },
       });
     } catch (error) {
       console.error(error);
     }
   };
+  
   
   
   return (
@@ -125,7 +125,7 @@ const AddStatus = () => {
         keyboardType="default"
         placeholderTextColor="#b9bfb8"
         value={Number}
-      onChangeText={text => setNumber(text)}
+        onChangeText={text => setNumber(parseInt(text))}
         maxLength={3}
       />
      <Pressable

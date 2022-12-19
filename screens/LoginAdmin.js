@@ -27,6 +27,7 @@ const LoginAdmin = () => {
      createToken(email, password).then(async response => {
        if (response.status === 200) {
          //navigation.navigate("HomeAdmin");
+         navigation.navigate('AddStatus', {email: email, password: password})
          navigation.navigate('HomeAdmin', { email: email, password: password });
          const accessToken = response.json().access_token;
         storeAccessToken(accessToken);
