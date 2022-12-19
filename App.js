@@ -20,7 +20,7 @@ import Notification1 from "./screens/Notification1";
 import Home from "./screens/Home";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);

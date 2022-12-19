@@ -15,7 +15,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import * as FileSystem from 'expo-file-system';
-import LoginContext from './context/LoginContext';
+import { setGenericPassword } from 'react-native-keychain';
+import { Keychain } from 'react-native-keychain';
 
 const LoginAdmin = () => {
   const navigation = useNavigation();
@@ -28,12 +29,8 @@ const LoginAdmin = () => {
          //navigation.navigate("HomeAdmin");
          navigation.navigate('HomeAdmin', { email: email, password: password });
          const accessToken = response.json().access_token;
-         FileSystem.writeAsStringAsync(
-         FileSystem.documentDirectory + 'access_token.json',
-         JSON.stringify(accessToken)
-
-     );
-         console.log(data.access_token);
+        storeAccessToken(accessToken);
+     
        } else if (response.status === 401) {
          // Invalid credentials
          console.log("Invalid credentials");
@@ -42,12 +39,15 @@ const LoginAdmin = () => {
          console.log("Login failed:", response.status, response.statusText);
        }
      });
-    
-    
-      
-   
+
   };
-  
+  const storeAccessToken = async (accessToken) => {
+    try {
+      await Keychain.setGenericPassword('access_token', accessToken);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
 
 
@@ -105,6 +105,7 @@ const LoginAdmin = () => {
           secureTextEntry
           keyboardType="default"
           placeholderTextColor="#b4b4b4"
+          maxLength={6}
 
         />
       </View>
@@ -130,14 +131,10 @@ const LoginAdmin = () => {
   style={styles.buttonLogin}
   //onPress={() => navigation.navigate("HomeAdmin")} 
   onPress={() => onPressDetail(email, password)}>
-    <LoginContext.Provider value={{ email, password }}>
-      {/* components that need access to email and password go here */}
-    </LoginContext.Provider>
   <Pressable style={styles.backgroundButton} />
   <Text style={styles.login1}>Login</Text>
 </Pressable>
 
-     
     </View>
   );
 };

@@ -9,12 +9,11 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation,navigate } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import axios from 'axios';
 import React, { useState,useEffect } from 'react';
-import { useContext } from 'react';
-import LoginContext from './context/LoginContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Keychain } from 'react-native-keychain';
+
 import { useRoute } from '@react-navigation/native';
 const HomeAdmin = () => {
   const navigation = useNavigation();
@@ -22,6 +21,7 @@ const HomeAdmin = () => {
   const route = useRoute();
   const email = route.params.email;
   const password = route.params.password;
+  
  
   
 
@@ -101,7 +101,11 @@ useEffect(() => {
         <TouchableOpacity
           style={styles.rectangleTouchableOpacity}
           activeOpacity={0.2}
-          onPress={() => navigation.navigate("AddStatus")}
+          onPress={() => {
+            navigation.navigate('AddStatus', {
+              email1: email,
+              password1: password,
+            });}}
         />
         <Text style={styles.addStatus}>Edit Status</Text>
       </TouchableOpacity>

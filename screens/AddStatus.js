@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useState } from "react";
+//import * as React from "react";
+import React, { useState,useEffect } from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -10,18 +10,65 @@ import {
   Text,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
-
+import axios from 'axios';
+import { useRoute } from '@react-navigation/native';
 const AddStatus = () => {
   const navigation = useNavigation();
   const [Number, setNumber] = useState('');
   const [From, setFrom] = useState('');
   const [Destination, setDestination] = useState('');
   const [Detail, setDetail] = useState('');
-  const onPressDetail = (Number,From,Destination,Detail) => {
-    navigation.navigate('AddStatus', { Number:Number,From:From,Destination:Destination,Detail:Detail });
+  const route = useRoute();
+  let email1, password1;
+  if (route && route.params) {
+    email1 = route.params.email;
+    password1 = route.params.password;
   }
-
+  const createToken = async (email1, password1) => {
+    try {
+      const data = {
+        grant_type: '',
+        username: email1,
+        password: password1,
+        scope: '',
+        client_id: '',
+        client_secret: '',
+      };
+  
+      const response = await axios.post('https://shark-app-wblp9.ondigitalocean.app/api/token', data, {
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-API-ID': String,
+          'X-API-Password': String,
+        },
+      });
+  
+      return response.data.access_token;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const sendLineNotify = async () => {
+    try {
+      const accessToken = await createToken(email1, password1);
+      const response = await axios.post('https://shark-app-wblp9.ondigitalocean.app/Status?trainNumber=275&onTime=true&message=454', {
+        trainNumber: Number,
+        onTime: true,
+        message: Detail,
+      }, {
+        headers: {
+          'accept': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjFAcmFpbHdheS5hYy50aCIsImlkU3RhdGlvbiI6MSwic3RhdGlvbk5hbWUiOiJLcmF1bmdUaGVwIiwiaWQiOjF9.5o5sV_Id1kIUVfkt9TX9S22Xri_vshLZcOkSNYZnjKQ`,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
   return (
     <View style={styles.addStatus1}>
       <StatusBar barStyle="default" />
@@ -83,7 +130,7 @@ const AddStatus = () => {
       />
      <Pressable
   style={styles.buttonLogin}
-  onPress={() => createNotification(Number, From, Destination, Detail)}>
+  onPress={() => sendLineNotify(Number, From, Destination, Detail)}>
   <View style={styles.backgroundButton} />
   <Text style={styles.sendNotification}>Send Notification</Text>
 </Pressable>
