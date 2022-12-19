@@ -18,6 +18,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 const Home = () => {
 const [ items, setItems] = useState([])
+const [ itemsName, setItemsName] = useState([])
 
   useEffect(() => {
         fetch('https://shark-app-wblp9.ondigitalocean.app/Home')
@@ -26,9 +27,8 @@ const [ items, setItems] = useState([])
               setItems(result)
             })
       }, [])
-
-  const onPressDetail = (number, name, nameDes) => {
-    navigation.navigate('Detail', {number: number, name: name, nameDes: nameDes})
+  const onPressDetail = (number, name, nameDes, time, timeDes) => {
+    navigation.navigate('Detail', {number: number, name: name, nameDes: nameDes, time: time, timeDes: timeDes})
   }
  
   const [isLoading, setLoading] = useState(true);
@@ -37,7 +37,62 @@ const [ items, setItems] = useState([])
   const [dropDownHomeOpen, setDropDownHomeOpen] = useState(false);
   const [dropDownHomeValue, setDropDownHomeValue] = useState("");
   const [dropDownHomeItems, setDropDownHomeItems] = useState([
-    { value: "Pra chom Klao", label: "Pra chom Klao" },
+    { value: "1", label: "กรุงเทพ" },
+    { value: "2", label: "อุรุพงษ์" },
+    { value: "3", label: "พญาไท" },
+    { value: "4", label: "มักกะสัน" },
+    { value: "5", label: "ราชปรารภ" },
+    { value: "6", label: "อโศก" },
+    { value: "7", label: "คลองตัน" },
+    { value: "8", label: "สุขุมวิท 71" },
+    { value: "9", label: "หัวหมาก" },
+    { value: "10", label: "บ้านทับช้าง" },
+    { value: "11", label: "ซอยวัดลานบุญ" },
+    { value: "12", label: "ลาดกระบัง" },
+    { value: "13", label: "พระจอมเกล้า" },
+    { value: "14", label: "หัวตะเข้" },
+    { value: "15", label: "คลองหลวงแพ่ง" },
+    { value: "16", label: "คลองอุดมชลจร" },
+    { value: "17", label: "เปรง" },
+    { value: "18", label: "คลองแขวงกลั่น" },
+    { value: "19", label: "คลองบางพระ" },
+    { value: "20", label: "บางเตย" },
+    { value: "21", label: "ชุมทางฉะเชิงเทรา" },
+    { value: "22", label: "ดอนสีนนท์" },
+    { value: "23", label: "บางน้ำเปรี้ยว" },
+    { value: "24", label: "ชุมทางคลองสิบเก้า" },
+    { value: "25", label: "พานทอง" },
+    { value: "26", label: "โยทะกา" },
+    { value: "27", label: "บ้านสร้าง" },
+    { value: "28", label: "ชลบุรี" },
+    { value: "29", label: "บ้านปากพลี" },
+    { value: "30", label: "บางพระ" },
+    { value: "31", label: "ปราจีนบุรี" },
+    { value: "32", label: "เขาพระบาท" },
+    { value: "33", label: "โคกมะกอก" },
+    { value: "34", label: "ชุมทางศรีราชา" },
+    { value: "35", label: "ประจันตคาม" },
+    { value: "36", label: "บางละมุง" },
+    { value: "37", label: "บ้านดงบัง" },
+    { value: "38", label: "บ้านพรหมแสง" },
+    { value: "39", label: "พัทยา" },
+    { value: "40", label: "พัทยาใต้" },
+    { value: "41", label: "กบินทร์บุรี" },
+    { value: "42", label: "บ้านห้วยขวาง" },
+    { value: "43", label: "ญาณสังวราราม" },
+    { value: "44", label: "หนองสัง" },
+    { value: "45", label: "สวนนงนุช" },
+    { value: "46", label: "ชุมทางเขาชีจรรย์" },
+    { value: "47", label: "บ้านพลูตาหลวง" },
+    { value: "48", label: "พระปรง" },
+    { value: "49", label: "บ้านแก้ง" },
+    { value: "50", label: "ศาลาลำดวน" },
+    { value: "51", label: "สระแก้ว" },
+    { value: "52", label: "ท่าเกษม" },
+    { value: "53", label: "ห้วยโจด" },
+    { value: "54", label: "วัฒนานคร" },
+    { value: "55", label: "ห้วยเดื่อ" },
+    { value: "56", label: "อรัญประเทศ" },
 
   ]);
 
@@ -47,7 +102,7 @@ const [ items, setItems] = useState([])
       <View style={styles.ScrollViewData}>
       {items.map(item => (
         <View style={{height: 140}}>
-        <Pressable style={styles.homeTrainINFO} onPress={() => onPressDetail(item.number,item.name,item.nameDes)}>
+        <Pressable style={styles.homeTrainINFO} onPress={() => onPressDetail(item.number,item.name,item.nameDes,item.time,item.timeDes)}>
         <View style={styles.groupView5}>
           <View style={styles.rectangleView4} />
           <View style={styles.rectangleView5} />
@@ -171,11 +226,11 @@ const styles = StyleSheet.create({
   },
   dropDownHomeValue: {
     color: "#030303",
-    fontSize: 12,
+    fontSize: 15,
     fontFamily: "Istok Web",
   },
   dropDownHomeText: {
-    color: "#b3b3b3",
+    color: "#000000",
   },
   icon: {
     width: "100%",

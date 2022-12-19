@@ -13,32 +13,146 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useNavigation } from "@react-navigation/native";
 
 const Search = () => {
+  const onPressDetail = (from, to,toName, fromName) => {
+    navigation.navigate('Search2', {from: from, to: to})
+  }
+
   const [buttonFromOpen, setButtonFromOpen] = useState(false);
   const [buttonFromValue, setButtonFromValue] = useState("");
+  const [selectedLabel, setSelectedLabel] = useState("");
   const [buttonFromItems, setButtonFromItems] = useState([
-    { value: "A", label: "A" },
-    { value: "B", label: "B" },
+    { value: "1", label: "กรุงเทพ" },
+    { value: "2", label: "อุรุพงษ์" },
+    { value: "3", label: "พญาไท" },
+    { value: "4", label: "มักกะสัน" },
+    { value: "5", label: "ราชปรารภ" },
+    { value: "6", label: "อโศก" },
+    { value: "7", label: "คลองตัน" },
+    { value: "8", label: "สุขุมวิท 71" },
+    { value: "9", label: "หัวหมาก" },
+    { value: "10", label: "บ้านทับช้าง" },
+    { value: "11", label: "ซอยวัดลานบุญ" },
+    { value: "12", label: "ลาดกระบัง" },
+    { value: "13", label: "พระจอมเกล้า" },
+    { value: "14", label: "หัวตะเข้" },
+    { value: "15", label: "คลองหลวงแพ่ง" },
+    { value: "16", label: "คลองอุดมชลจร" },
+    { value: "17", label: "เปรง" },
+    { value: "18", label: "คลองแขวงกลั่น" },
+    { value: "19", label: "คลองบางพระ" },
+    { value: "20", label: "บางเตย" },
+    { value: "21", label: "ชุมทางฉะเชิงเทรา" },
+    { value: "22", label: "ดอนสีนนท์" },
+    { value: "23", label: "บางน้ำเปรี้ยว" },
+    { value: "24", label: "ชุมทางคลองสิบเก้า" },
+    { value: "25", label: "พานทอง" },
+    { value: "26", label: "โยทะกา" },
+    { value: "27", label: "บ้านสร้าง" },
+    { value: "28", label: "ชลบุรี" },
+    { value: "29", label: "บ้านปากพลี" },
+    { value: "30", label: "บางพระ" },
+    { value: "31", label: "ปราจีนบุรี" },
+    { value: "32", label: "เขาพระบาท" },
+    { value: "33", label: "โคกมะกอก" },
+    { value: "34", label: "ชุมทางศรีราชา" },
+    { value: "35", label: "ประจันตคาม" },
+    { value: "36", label: "บางละมุง" },
+    { value: "37", label: "บ้านดงบัง" },
+    { value: "38", label: "บ้านพรหมแสง" },
+    { value: "39", label: "พัทยา" },
+    { value: "40", label: "พัทยาใต้" },
+    { value: "41", label: "กบินทร์บุรี" },
+    { value: "42", label: "บ้านห้วยขวาง" },
+    { value: "43", label: "ญาณสังวราราม" },
+    { value: "44", label: "หนองสัง" },
+    { value: "45", label: "สวนนงนุช" },
+    { value: "46", label: "ชุมทางเขาชีจรรย์" },
+    { value: "47", label: "บ้านพลูตาหลวง" },
+    { value: "48", label: "พระปรง" },
+    { value: "49", label: "บ้านแก้ง" },
+    { value: "50", label: "ศาลาลำดวน" },
+    { value: "51", label: "สระแก้ว" },
+    { value: "52", label: "ท่าเกษม" },
+    { value: "53", label: "ห้วยโจด" },
+    { value: "54", label: "วัฒนานคร" },
+    { value: "55", label: "ห้วยเดื่อ" },
+    { value: "56", label: "อรัญประเทศ" },
   ]);
   const [buttonToOpen, setButtonToOpen] = useState(false);
   const [buttonToValue, setButtonToValue] = useState("");
   const [buttonToItems, setButtonToItems] = useState([
-    { value: "A", label: "A" },
-    { value: "B", label: "B" },
+    { value: "1", label: "กรุงเทพ" },
+    { value: "2", label: "อุรุพงษ์" },
+    { value: "3", label: "พญาไท" },
+    { value: "4", label: "มักกะสัน" },
+    { value: "5", label: "ราชปรารภ" },
+    { value: "6", label: "อโศก" },
+    { value: "7", label: "คลองตัน" },
+    { value: "8", label: "สุขุมวิท 71" },
+    { value: "9", label: "หัวหมาก" },
+    { value: "10", label: "บ้านทับช้าง" },
+    { value: "11", label: "ซอยวัดลานบุญ" },
+    { value: "12", label: "ลาดกระบัง" },
+    { value: "13", label: "พระจอมเกล้า" },
+    { value: "14", label: "หัวตะเข้" },
+    { value: "15", label: "คลองหลวงแพ่ง" },
+    { value: "16", label: "คลองอุดมชลจร" },
+    { value: "17", label: "เปรง" },
+    { value: "18", label: "คลองแขวงกลั่น" },
+    { value: "19", label: "คลองบางพระ" },
+    { value: "20", label: "บางเตย" },
+    { value: "21", label: "ชุมทางฉะเชิงเทรา" },
+    { value: "22", label: "ดอนสีนนท์" },
+    { value: "23", label: "บางน้ำเปรี้ยว" },
+    { value: "24", label: "ชุมทางคลองสิบเก้า" },
+    { value: "25", label: "พานทอง" },
+    { value: "26", label: "โยทะกา" },
+    { value: "27", label: "บ้านสร้าง" },
+    { value: "28", label: "ชลบุรี" },
+    { value: "29", label: "บ้านปากพลี" },
+    { value: "30", label: "บางพระ" },
+    { value: "31", label: "ปราจีนบุรี" },
+    { value: "32", label: "เขาพระบาท" },
+    { value: "33", label: "โคกมะกอก" },
+    { value: "34", label: "ชุมทางศรีราชา" },
+    { value: "35", label: "ประจันตคาม" },
+    { value: "36", label: "บางละมุง" },
+    { value: "37", label: "บ้านดงบัง" },
+    { value: "38", label: "บ้านพรหมแสง" },
+    { value: "39", label: "พัทยา" },
+    { value: "40", label: "พัทยาใต้" },
+    { value: "41", label: "กบินทร์บุรี" },
+    { value: "42", label: "บ้านห้วยขวาง" },
+    { value: "43", label: "ญาณสังวราราม" },
+    { value: "44", label: "หนองสัง" },
+    { value: "45", label: "สวนนงนุช" },
+    { value: "46", label: "ชุมทางเขาชีจรรย์" },
+    { value: "47", label: "บ้านพลูตาหลวง" },
+    { value: "48", label: "พระปรง" },
+    { value: "49", label: "บ้านแก้ง" },
+    { value: "50", label: "ศาลาลำดวน" },
+    { value: "51", label: "สระแก้ว" },
+    { value: "52", label: "ท่าเกษม" },
+    { value: "53", label: "ห้วยโจด" },
+    { value: "54", label: "วัฒนานคร" },
+    { value: "55", label: "ห้วยเดื่อ" },
+    { value: "56", label: "อรัญประเทศ" },
   ]);
+  console.log(selectedLabel)
   const navigation = useNavigation();
 
   return ( <View style={styles.homeBG}>
     <View style={styles.search2}>
       <StatusBar barStyle="default" />
       <View style={styles.background} />
-      <Text style={styles.form}>Form</Text>
-      <Text style={styles.to}>To</Text>
+      <Text style={styles.form}>จาก</Text>
+      <Text style={styles.to}>ถึง</Text>
       <Text style={styles.findYourTrainLetsMakeA}>
-        <Text style={styles.findYourTrain}>Find your train,</Text>
-        <Text style={styles.letsMakeA}>let’s make a journey.</Text>
+        <Text style={styles.findYourTrain}>ค้นหา</Text>
       </Text>
+      </View>
       <View style={styles.dropDown}>
-        <Pressable style={styles.buttonSearch} accessible="true">
+        <Pressable style={styles.buttonSearch} onPress={() => onPressDetail(buttonFromValue,buttonToValue)}>
           <View style={styles.backgroundButton} />
           <Text style={styles.search}>Search</Text>
         </Pressable>
@@ -48,10 +162,11 @@ const Search = () => {
             setOpen={setButtonFromOpen}
             value={buttonFromValue}
             setValue={setButtonFromValue}
-            placeholder="Select your location"
+            placeholder="เลือกสถานีต้นทาง"
             items={buttonFromItems}
             labelStyle={styles.buttonFromValue}
             dropDownDirection="TOP"
+            onChangeItem={buttonFromItems => setSelectedLabel(buttonFromItems.label)}
           />
         </View>
         <View style={styles.buttonTo}>
@@ -60,12 +175,11 @@ const Search = () => {
             setOpen={setButtonToOpen}
             value={buttonToValue}
             setValue={setButtonToValue}
-            placeholder="Select destination"
+            placeholder="เลือกสถานีปลายทาง"
             items={buttonToItems}
             labelStyle={styles.buttonToValue}
           />
         </View>
-      </View>
       <Pressable style={styles.back} onPress={() => navigation.goBack()}>
         <Image
           style={styles.icon}
@@ -78,7 +192,8 @@ const Search = () => {
         resizeMode="cover"
         source={require("../assets/image-11.png")}
       />
-      <Pressable
+    </View>
+    <Pressable
         style={styles.bottomTab}
         onPress={() => navigation.navigate("Home")}
       >
@@ -122,19 +237,18 @@ const Search = () => {
         </Pressable>
       </Pressable>
     </View>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
   buttonFromValue: {
-    color: "#b4b4b4",
-    fontSize: 12,
+    color: "#000000",
+    fontSize: 13,
     fontFamily: "Istok Web",
   },
   buttonToValue: {
-    color: "#b4b4b4",
-    fontSize: 12,
+    color: "#000000",
+    fontSize: 14,
     fontFamily: "Istok Web",
   },
   ml42: {
@@ -188,7 +302,7 @@ const styles = StyleSheet.create({
   findYourTrainLetsMakeA: {
     position: "absolute",
     top: 165,
-    left: 28,
+    left: 140,
     fontSize: 25,
     fontWeight: "700",
     fontFamily: "Istok Web",
@@ -247,8 +361,8 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     position: "absolute",
-    top: 299,
-    left: 30,
+    top: 320,
+    left: 43,
     width: 300,
     height: 202,
   },
@@ -406,8 +520,8 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 670,
-    left: 0,
+    top: 690,
+    left: 16,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
     shadowOffset: {
@@ -424,6 +538,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  BottomPo: {
+    top: 20,
+    left: 16.5,
+    position: "relative",
+    height: 0,
+  },
   search2: {
     top: 20,
     left: 16.5,
@@ -431,7 +551,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
-    height: 800,
+    height: 8000,
     overflow: "hidden",
   },
   homeBG: {

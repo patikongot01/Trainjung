@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import {
   StatusBar,
   StyleSheet,
@@ -6,14 +7,86 @@ import {
   Image,
   Text,
   View,
+  Button,
+  Alert,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, navigate} from "@react-navigation/native";
+import Favourite from './Favourite';
+import * as RNFS from 'react-native-fs';
 
-const Detail = ({Navigation, route}) => {
+const Detail = ({route, props}) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const navigation = useNavigation();
   const onPressTable = (number) => {
     navigation.navigate('TimeTable', {number: number})
   }
+
+  const handlePressFavourite = () => {
+    writeFavoriteJson();
+    AlertFavorite();
+  };
+
+  const dataFavorite = {
+    key: number,
+    number: number,
+    name: name,
+    time: time,
+    nameDes: nameDes,
+    timeDes: timeDes,
+  };
+
+  const writeFavoriteJson = () => {
+    var path = "../dataclient/favoriteData.json";
+    RNFS.writeFile(path, dataFavorite, 'utf8')
+     .then(() => console.log('FILE WRITTEN!'))
+     .catch((err) => console.log(err.message));
+ }
+
+  const AlertFavorite = () =>
+  Alert.alert(
+    "Add to Favorite Success",
+    "Train No."+route.params.number+" "+route.params.name+" - "+route.params.nameDes,
+    [
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  );
+
+
+  const handlePressBookmark = () => {
+    AlertBookmark();
+  };
+  const  number =  route.params.number;
+  const  name = route.params.name;
+  const  time = route.params.time;
+  const  nameDes = route.params.nameDes;
+  const  timeDes = route.params.timeDes;
+
+  const dataBookmark = {
+    key: number,
+    number: number,
+    name: name,
+    time: time,
+    nameDes: nameDes,
+    timeDes: timeDes,
+  };
+
+
+  const filePath = `../dataclient/favoriteData.json`;
+  const WriteJson = (data) =>
+      fs.writeFile(filePath, JSON.stringify(data), 'utf8')
+      .then(() => console.log('File written!'))
+      .catch(error => console.error(error));
+
+
+  const AlertBookmark = () =>
+  Alert.alert(
+    "Add to Bookmark Success",
+    "Train No."+route.params.number+" "+route.params.name+" - "+route.params.nameDes,
+    [
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  );
+
   return (
     <View style={styles.homeBG}>
     <View style={styles.detail}>
@@ -36,10 +109,7 @@ const Detail = ({Navigation, route}) => {
         source={require("../assets/ellipse-347.png")}
       />
       <Text style={styles.class3BogieThirdClassCarr}>
-        <Text style={styles.class3}>{`Class 3 `}</Text>
-        <Text
-          style={styles.bogieThirdClass}
-        >{`Bogie Third Class Carriage `}</Text>
+        <Text style={styles.class3}>{`Class 3 Bogie Third Class Carriage`}</Text>
       </Text>
       <Pressable
         style={styles.viewsNo275TimeTable1}
@@ -119,6 +189,18 @@ const Detail = ({Navigation, route}) => {
           <Text style={styles.labelText3}>Bookmark</Text>
         </Pressable>
       </Pressable>
+      <View style={styles.AddFavoriteBotton}>
+          <Button
+            title={'Add Favorite'}
+            onPress={handlePressFavourite}
+          />
+        </View>
+        <View style={styles.AddBookmarkBotton}>
+          <Button
+            title={'Add Bookmark'}
+            onPress={handlePressBookmark}
+          />
+        </View>
     </View>
     </View>
   );
@@ -134,6 +216,26 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
     overflow: "hidden",
     maxHeight: "100%",
+  },
+  AddFavoriteBotton: {
+    position: "absolute",
+    top: 435,
+    left: 56,
+    fontSize: 25,
+    fontWeight: "700",
+    fontFamily: "Istok Web",
+    color: "#000",
+    textAlign: "center",
+  },
+  AddBookmarkBotton: {
+    position: "absolute",
+    top: 435,
+    left: 180,
+    fontSize: 25,
+    fontWeight: "700",
+    fontFamily: "Istok Web",
+    color: "#000",
+    textAlign: "center",
   },
   back: {
     position: "absolute",
@@ -192,7 +294,7 @@ const styles = StyleSheet.create({
   },
   class3BogieThirdClassCarr: {
     position: "absolute",
-    top: 421,
+    top: 390,
     left: 98,
     fontSize: 10,
     fontWeight: "700",
@@ -200,6 +302,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   viewsNo275TimeTable: {
+    top: 40,
     fontSize: 10,
     textDecoration: "underline",
     fontWeight: "700",
@@ -224,7 +327,7 @@ const styles = StyleSheet.create({
   oRDINARY: {
     position: "absolute",
     top: 69,
-    left: 134,
+    left: 137,
     fontSize: 10,
     fontWeight: "700",
     fontFamily: "Istok Web",

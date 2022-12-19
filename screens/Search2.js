@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,232 +7,51 @@ import {
   Image,
   Pressable,
   StatusBar,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const Search2 = () => {
+const Search2 = ({Navigation, route}) => {
   const navigation = useNavigation();
+  const [ items, setItems] = useState([])
+  const [ itemsName, setItemsName] = useState([])
+  const from = route.params.from;
+  const to = route.params.to;
+  useEffect(() => {
+    fetch('https://shark-app-wblp9.ondigitalocean.app/allStationAtoB/'+route.params.from+'/'+route.params.to)
+        .then(res => res.json())
+        .then((result) => {
+          setItems(result)
+        })
+    fetch('https://shark-app-wblp9.ondigitalocean.app/NameOfTrain')
+        .then(res => res.json())
+        .then((result) => {
+          setItemsName(result)
+        })
+      }, [])
 
+  const onPressDetail = (number, name, nameDes, time, timeDes) => {
+    navigation.navigate('Detail', {number: number, name: name, nameDes: nameDes, time: time, timeDes: timeDes})
+  }
   return (
     <View style={styles.search2}>
       <View style={styles.scroll1}>
         <View style={styles.frameView}>
           <View style={styles.scroll}>
-            <View style={styles.groupView2}>
-              <View style={styles.groupView}>
-                <View style={styles.rectangleView} />
-                <View style={styles.rectangleView1} />
-              </View>
-              <Text style={styles.oRDINARY}>{`ORDINARY `}</Text>
-              <Text style={styles.nO281}>{`NO.281 `}</Text>
-              <Image
-                style={styles.vectorIcon}
-                resizeMode="cover"
-                source={require("../assets/vector22.png")}
-              />
-              <Text style={styles.bangkokKabinBuri}>Bangkok - Kabin buri</Text>
-              <View style={styles.groupView1}>
-                <Text style={styles.bangkok}>Bangkok</Text>
-                <Text style={styles.text}>8:00</Text>
-                <Text style={styles.arr}>Arr.</Text>
-                <Text style={styles.dep}>Dep.</Text>
-                <Text style={styles.text1}>8:54</Text>
-                <Text style={styles.praChomKlao}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-2.png")}
-                />
-              </View>
-            </View>
-            <View style={styles.groupView5}>
-              <View style={styles.groupView3}>
-                <View style={styles.rectangleView2} />
-                <View style={styles.rectangleView3} />
-              </View>
-              <Text style={styles.oRDINARY1}>{`ORDINARY `}</Text>
-              <Text style={styles.nO283}>{`NO.283 `}</Text>
-              <Image
-                style={styles.vectorIcon1}
-                resizeMode="cover"
-                source={require("../assets/vector22.png")}
-              />
-              <Text style={styles.bangkokBanPluTaLuang}>
-                Bangkok - Ban Plu ta Luang
-              </Text>
-              <View style={styles.groupView4}>
-                <Text style={styles.bangkok1}>Bangkok</Text>
-                <Text style={styles.text2}>6:55</Text>
-                <Text style={styles.arr1}>Arr.</Text>
-                <Text style={styles.dep1}>Dep.</Text>
-                <Text style={styles.text3}>8:09</Text>
-                <Text style={styles.praChomKlao1}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon1}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-2.png")}
-                />
-              </View>
-            </View>
-            <View style={styles.groupView8}>
-              <View style={styles.groupView6}>
-                <View style={styles.rectangleView4} />
-                <View style={styles.rectangleView5} />
-              </View>
-              <Text style={styles.oRDINARY2}>{`ORDINARY `}</Text>
-              <Text style={styles.nO391}>{`NO.391 `}</Text>
-              <Image
-                style={styles.vectorIcon2}
-                resizeMode="cover"
-                source={require("../assets/vector24.png")}
-              />
-              <Text style={styles.bangkokChachoengsaoJunction}>
-                Bangkok-Chachoengsao Junction
-              </Text>
-              <View style={styles.groupView7}>
-                <Text style={styles.bangkok2}>Bangkok</Text>
-                <Text style={styles.text4}>16:55</Text>
-                <Text style={styles.arr2}>Arr.</Text>
-                <Text style={styles.dep2}>Dep.</Text>
-                <Text style={styles.text5}>17:48</Text>
-                <Text style={styles.praChomKlao2}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon2}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-25.png")}
-                />
-              </View>
-            </View>
-            <View style={styles.groupView11}>
-              <View style={styles.groupView9}>
-                <View style={styles.rectangleView6} />
-                <View style={styles.rectangleView7} />
-              </View>
-              <Text style={styles.oRDINARY3}>{`ORDINARY `}</Text>
-              <Text style={styles.nO279}>{`NO.279 `}</Text>
-              <Image
-                style={styles.vectorIcon3}
-                resizeMode="cover"
-                source={require("../assets/vector24.png")}
-              />
-              <Text style={styles.bangkokBanKlongLukBorder}>
-                Bangkok- Ban Klong Luk Border
-              </Text>
-              <View style={styles.groupView10}>
-                <Text style={styles.bangkok3}>Bangkok</Text>
-                <Text style={styles.text6}>13:05</Text>
-                <Text style={styles.arr3}>Arr.</Text>
-                <Text style={styles.dep3}>Dep.</Text>
-                <Text style={styles.text7}>13:45</Text>
-                <Text style={styles.praChomKlao3}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon3}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-25.png")}
-                />
-              </View>
-            </View>
-            <View style={styles.groupView14}>
-              <View style={styles.groupView12}>
-                <View style={styles.rectangleView8} />
-                <View style={styles.rectangleView9} />
-              </View>
-              <Text style={styles.oRDINARY4}>{`ORDINARY `}</Text>
-              <Text style={styles.nO379}>{`NO.379 `}</Text>
-              <Image
-                style={styles.vectorIcon4}
-                resizeMode="cover"
-                source={require("../assets/vector24.png")}
-              />
-              <Text style={styles.bangkokChachoengsaoJunction1}>
-                Bangkok-Chachoengsao Junction
-              </Text>
-              <View style={styles.groupView13}>
-                <Text style={styles.bangkok4}>Bangkok</Text>
-                <Text style={styles.text8}>16:35</Text>
-                <Text style={styles.arr4}>Arr.</Text>
-                <Text style={styles.dep4}>Dep.</Text>
-                <Text style={styles.text9}>17:27</Text>
-                <Text style={styles.praChomKlao4}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon4}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-25.png")}
-                />
-              </View>
-            </View>
-            <View style={styles.groupView17}>
-              <View style={styles.groupView15}>
-                <View style={styles.rectangleView10} />
-                <View style={styles.rectangleView11} />
-              </View>
-              <Text style={styles.oRDINARY5}>{`ORDINARY `}</Text>
-              <Text style={styles.nO277}>{`NO.277 `}</Text>
-              <Image
-                style={styles.vectorIcon5}
-                resizeMode="cover"
-                source={require("../assets/vector24.png")}
-              />
-              <Text style={styles.bangkokKabinBuri1}>Bangkok-Kabin Buri</Text>
-              <View style={styles.groupView16}>
-                <Text style={styles.bangkok5}>Bangkok</Text>
-                <Text style={styles.text10}>15:25</Text>
-                <Text style={styles.arr5}>Arr.</Text>
-                <Text style={styles.dep5}>Dep.</Text>
-                <Text style={styles.text11}>16:15</Text>
-                <Text style={styles.praChomKlao5}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon5}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-25.png")}
-                />
-              </View>
-            </View>
-            <View style={styles.groupView20}>
-              <View style={styles.groupView18}>
-                <View style={styles.rectangleView12} />
-                <View style={styles.rectangleView13} />
-              </View>
-              <Text style={styles.oRDINARY6}>{`ORDINARY `}</Text>
-              <Text style={styles.nO289}>{`NO.289 `}</Text>
-              <Image
-                style={styles.vectorIcon6}
-                resizeMode="cover"
-                source={require("../assets/vector22.png")}
-              />
-              <Text style={styles.bangkokChachoengsaoJunction2}>
-                {" "}
-                Bangkok-Chachoengsao Junction
-              </Text>
-              <View style={styles.groupView19}>
-                <Text style={styles.bangkok6}>Bangkok</Text>
-                <Text style={styles.text12}>12:10</Text>
-                <Text style={styles.arr6}>Arr.</Text>
-                <Text style={styles.dep6}>Dep.</Text>
-                <Text style={styles.text13}>13:00</Text>
-                <Text style={styles.praChomKlao6}>Pra Chom Klao</Text>
-                <Image
-                  style={styles.arrowIcon6}
-                  resizeMode="cover"
-                  source={require("../assets/arrow-2.png")}
-                />
-              </View>
-            </View>
-            <Image
-              style={styles.groupIcon}
-              resizeMode="cover"
-              source={require("../assets/group-7071.png")}
-            />
+          <ScrollView>
+          <View style={styles.ScrollViewData}>
+          {items.map(item => (
+            <View style={{height: 140}}>
             <Pressable
               style={styles.detail}
-              onPress={() => navigation.navigate("Detail")}
+              onPress={() => onPressDetail(item.number,item.number,item.number,item.Time[0].time,item.Time[2].time)}
             >
               <View style={styles.groupView21}>
                 <View style={styles.rectangleView14} />
                 <View style={styles.rectangleView15} />
               </View>
               <Text style={styles.oRDINARY7}>{`ORDINARY `}</Text>
-              <Text style={styles.nO275}>{`NO.275 `}</Text>
+              <Text style={styles.nO275}>{`NO. `}{item.number}</Text>
               <Image
                 style={styles.vectorIcon7}
                 resizeMode="cover"
@@ -242,10 +62,10 @@ const Search2 = () => {
               </Text>
               <View style={styles.groupView22}>
                 <Text style={styles.bangkok7}>Bangkok</Text>
-                <Text style={styles.text14}>5:55</Text>
+                <Text style={styles.text14}>{item.Time[0].time}</Text>
                 <Text style={styles.arr7}>Arr.</Text>
                 <Text style={styles.dep7}>Dep.</Text>
-                <Text style={styles.text15}>6:59</Text>
+                <Text style={styles.text15}>{item.Time[2].time}</Text>
                 <Text style={styles.praChomKlao7}>Pra Chom Klao</Text>
                 <Image
                   style={styles.arrowIcon7}
@@ -254,9 +74,25 @@ const Search2 = () => {
                 />
               </View>
             </Pressable>
+            </View>
+            ))}
+          </View>
+          </ScrollView>
           </View>
         </View>
       </View>
+      <View style={styles.bGTOp} />
+      <Text style={styles.arrStation}>สถานีต้นทาง</Text>
+      <Text style={styles.bangkok8}>....</Text>
+      <View style={styles.frameView1}>
+        <Image
+          style={styles.sysbolIcon}
+          resizeMode="cover"
+          source={require("../assets/sysbol.png")}
+        />
+      </View>
+      <Text style={styles.banKlongLukBorder}>.......</Text>
+      <Text style={styles.depStation}>สถานีปลายทาง</Text>
       <View style={styles.bottomTab}>
         <Pressable
           style={styles.home}
@@ -303,29 +139,11 @@ const Search2 = () => {
           <Text style={styles.labelText3}>Bookmark</Text>
         </Pressable>
       </View>
-      <View style={styles.background} />
-      <View style={styles.bGTOp} />
-      <Text style={styles.arrStation}>Arr. Station</Text>
-      <Text style={styles.bangkok8}>Bangkok</Text>
-      <View style={styles.frameView1}>
-        <Image
-          style={styles.sysbolIcon}
-          resizeMode="cover"
-          source={require("../assets/sysbol.png")}
-        />
-      </View>
-      <Text style={styles.banKlongLukBorder}>Ban Klong Luk Border</Text>
-      <Text style={styles.depStation}>Dep. Station</Text>
       <StatusBar barStyle="default" />
       <Pressable
         style={styles.back}
         onPress={() => navigation.navigate("Home")}
       >
-        <Image
-          style={styles.icon1}
-          resizeMode="cover"
-          source={require("../assets/back6.png")}
-        />
       </Pressable>
     </View>
   );
@@ -351,6 +169,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     width: 296,
     height: 115,
+  },
+  ScrollViewData: {
+    top: 0,
+    left: 0,
+    position: "relative",
+    flex: 1,
+    width: "100%",
+    height: 3000,
+    overflow: "hidden",
   },
   rectangleView1: {
     position: "absolute",
@@ -1756,7 +1583,7 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 723,
+    top: 668,
     left: 0,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
@@ -1892,8 +1719,9 @@ const styles = StyleSheet.create({
     height: "1.9%",
   },
   search2: {
+    top: 20,
+    left: 16.5,
     position: "relative",
-    backgroundColor: "#ffe9cf",
     flex: 1,
     width: "100%",
     height: 800,

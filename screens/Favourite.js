@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import {
   StatusBar,
   StyleSheet,
@@ -8,11 +9,11 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, navigate, navigation} from "@react-navigation/native";
 
-const Favourite = () => {
+const Favourite = (props) => {
   const navigation = useNavigation();
-
+ 
   return ( <View style={styles.homeBG}>
     <View style={styles.favourite2}>
       <StatusBar barStyle="default" />

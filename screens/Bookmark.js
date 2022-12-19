@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 const Bookmark = () => {
   const navigation = useNavigation();
 
-  return (
+  return ( <View style={styles.bookmarkBG}>
     <View style={styles.bookmark2}>
       <StatusBar barStyle="default" />
       <Image
@@ -108,6 +108,7 @@ const Bookmark = () => {
           <Text style={styles.labelText3}>Bookmark</Text>
         </Pressable>
       </View>
+    </View>
     </View>
   );
 };
@@ -479,7 +480,7 @@ const styles = StyleSheet.create({
   },
   bottomTab: {
     position: "absolute",
-    top: 723,
+    top: 670,
     left: 0,
     backgroundColor: "#fff",
     shadowColor: "rgba(0, 0, 0, 0.03)",
@@ -498,11 +499,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   bookmark2: {
+    top: 20,
+    left: 16.5,
     position: "relative",
     backgroundColor: "#fff",
     flex: 1,
     width: "100%",
     height: 800,
+    overflow: "hidden",
+  },
+  bookmarkBG: {
+    backgroundColor: "#fff",
+    flex: 1,
     overflow: "hidden",
   },
 });
