@@ -86,7 +86,7 @@ const AddStatus = () => {
       <View style={styles.rectangleView} />
       <TextInput
         style={styles.groupTextInput3}
-        placeholder="Detail"
+        placeholder="รายละเอียด"
         keyboardType="default"
         placeholderTextColor="#b9bfb8"
         value={Detail}
@@ -98,7 +98,7 @@ const AddStatus = () => {
       <View style={styles.rectangleView1} />
       <TextInput
         style={styles.groupTextInput1}
-        placeholder="Destination"
+        placeholder="ถึง"
         keyboardType="default"
         placeholderTextColor="#b9bfb8"
         value={Destination}
@@ -109,7 +109,7 @@ const AddStatus = () => {
       <View style={styles.rectangleView2} />
       <TextInput
         style={styles.groupTextInput2}
-        placeholder="From"
+        placeholder="จาก"
         keyboardType="default"
         placeholderTextColor="#b9bfb8"
         value={From}
@@ -121,7 +121,7 @@ const AddStatus = () => {
       <View style={styles.rectangleView3} />
       <TextInput
         style={styles.groupTextInput}
-        placeholder="Number"
+        placeholder="เลขขบวนรถไฟ"
         keyboardType="default"
         placeholderTextColor="#b9bfb8"
         value={Number}
@@ -132,7 +132,7 @@ const AddStatus = () => {
   style={styles.buttonLogin}
   onPress={() => sendLineNotify(Number, From, Destination, Detail)}>
   <View style={styles.backgroundButton} />
-  <Text style={styles.sendNotification}>Send Notification</Text>
+  <Text style={styles.sendNotification}>ส่งการแจ้งเตือน</Text>
 </Pressable>
       <Text style={styles.addStatus}>Add Status</Text>
       
